@@ -1,0 +1,2499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 1 – Periodic Table, Periodic Properties &amp; Variations</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   RESET & ROOT VARIABLES
+═══════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg:       #0c0f14;
+  --surface:  #131820;
+  --surface2: #1a2030;
+  --surface3: #212840;
+  --border:   #2a3245;
+  --border2:  #3a4560;
+
+  --gold:     #e8b84b;
+  --gold-dim: #8a6e2a;
+  --blue:     #5b9cf6;
+  --blue-dim: #2a4a80;
+  --green:    #4caf80;
+  --green-dim:#1e5c3a;
+  --red:      #f07070;
+  --red-dim:  #7a2a2a;
+  --purple:   #a78bfa;
+  --purple-dim:#4a2e80;
+  --teal:     #38c0c0;
+
+  --text:     #e2e8f0;
+  --text-2:   #94a3b8;
+  --text-3:   #5a6a80;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Source Serif 4', Georgia, serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  --radius:   12px;
+  --radius-sm: 8px;
+  --shadow:   0 8px 32px rgba(0,0,0,0.5);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════ */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 2rem;
+  overflow: hidden;
+}
+
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-content { position: relative; z-index: 1; }
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(232,184,75,0.08);
+  border: 1px solid rgba(232,184,75,0.25);
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 0.45rem 1.2rem;
+  border-radius: 40px;
+  margin-bottom: 1.8rem;
+  animation: fadeSlideUp 0.7s ease both;
+}
+
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: '◆';
+  font-size: 0.5rem;
+  opacity: 0.6;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  animation: fadeSlideUp 0.8s ease 0.1s both;
+}
+
+.hero h1 .line1 { display: block; color: var(--text); }
+.hero h1 .line2 { display: block; color: var(--gold); }
+.hero h1 .line3 { display: block; color: var(--text-2); font-style: italic; font-size: 85%; }
+
+.hero-desc {
+  font-size: 1.05rem;
+  color: var(--text-2);
+  max-width: 560px;
+  margin: 0 auto 2.5rem;
+  animation: fadeSlideUp 0.8s ease 0.2s both;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2.8rem;
+  animation: fadeSlideUp 0.8s ease 0.3s both;
+}
+
+.stat-item { text-align: center; }
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 0.3rem;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--gold);
+  color: #0c0f14;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 0.85rem 2rem;
+  border-radius: 40px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  animation: fadeSlideUp 0.8s ease 0.4s both;
+}
+.hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232,184,75,0.35); }
+.hero-cta .arrow { animation: bounceY 2s ease infinite; display: inline-block; }
+@keyframes bounceY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
+
+/* Floating element symbols */
+.hero-float {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 900;
+  pointer-events: none;
+  opacity: 0.04;
+  color: var(--gold);
+}
+
+/* ═══════════════════════════════════════════
+   APP LAYOUT
+═══════════════════════════════════════════ */
+.app {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* ═══════════════════════════════════════════
+   SIDEBAR
+═══════════════════════════════════════════ */
+.sidebar {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar-head {
+  padding: 1.4rem 1.4rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-logo {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+}
+
+.sidebar-sub { font-size: 0.72rem; color: var(--text-3); }
+
+.nav-group-label {
+  padding: 0.9rem 1.4rem 0.3rem;
+  font-size: 0.62rem;
+  font-family: var(--font-mono);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.52rem 1.4rem;
+  font-size: 0.84rem;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all 0.15s;
+  border-left: 2px solid transparent;
+  user-select: none;
+  position: relative;
+}
+
+.nav-item:hover {
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+  border-left-color: var(--border2);
+}
+
+.nav-item.active {
+  background: rgba(232,184,75,0.07);
+  color: var(--gold);
+  border-left-color: var(--gold);
+  font-weight: 600;
+}
+
+.nav-item .nav-icon { font-size: 0.95rem; flex-shrink: 0; }
+.nav-item .nav-chevron { margin-left: auto; font-size: 0.7rem; transition: transform 0.2s; color: var(--text-3); }
+.nav-item.sub-open .nav-chevron { transform: rotate(90deg); }
+
+.nav-sub { overflow: hidden; background: rgba(0,0,0,0.2); }
+.nav-sub-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1.4rem 0.4rem 2.8rem;
+  font-size: 0.8rem;
+  color: var(--text-3);
+  cursor: pointer;
+  transition: all 0.15s;
+  border-left: 2px solid transparent;
+}
+.nav-sub-item:hover { color: var(--blue); background: rgba(91,156,246,0.05); border-left-color: var(--blue); }
+.nav-sub-item.active { color: var(--blue); border-left-color: var(--blue); }
+.nav-sub-item::before { content: '—'; font-size: 0.6rem; color: var(--text-3); }
+
+/* ═══════════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════════ */
+.main-content {
+  padding: 2.5rem 3rem;
+  max-width: 1000px;
+}
+
+.section { display: none; animation: sectionIn 0.3s ease; }
+.section.active { display: block; }
+@keyframes sectionIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+/* Section Header */
+.section-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.7rem;
+}
+.section-eyebrow::before { content: ''; width: 18px; height: 1.5px; background: var(--gold); }
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.section-sub { color: var(--text-2); font-size: 0.92rem; max-width: 680px; }
+
+/* ═══════════════════════════════════════════
+   CONTENT BLOCKS
+═══════════════════════════════════════════ */
+.block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.8rem 2rem;
+  margin-bottom: 1.8rem;
+}
+
+.block-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sub-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--blue);
+  margin: 1.2rem 0 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sub-title::before { content: ''; width: 6px; height: 6px; background: var(--blue); border-radius: 50%; flex-shrink: 0; }
+
+p { color: var(--text-2); font-size: 0.9rem; line-height: 1.78; margin-bottom: 0.6rem; }
+p:last-child { margin-bottom: 0; }
+strong { color: var(--text); font-weight: 600; }
+em { color: var(--gold); font-style: italic; }
+
+/* ═══════════════════════════════════════════
+   GRID LAYOUTS
+═══════════════════════════════════════════ */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+.three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-bottom: 1.5rem; }
+.four-col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.2rem; margin-bottom: 1.5rem; }
+
+/* ═══════════════════════════════════════════
+   CARDS
+═══════════════════════════════════════════ */
+.card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.3rem;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2.5px;
+  background: var(--card-top, var(--gold));
+}
+.card:hover { border-color: var(--card-top, var(--gold)); transform: translateY(-2px); box-shadow: var(--shadow); }
+.card-icon { font-size: 1.8rem; margin-bottom: 0.7rem; }
+.card-title { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 0.35rem; }
+.card-body { font-size: 0.8rem; color: var(--text-2); line-height: 1.65; }
+
+/* ═══════════════════════════════════════════
+   HIGHLIGHT BOXES
+═══════════════════════════════════════════ */
+.hl {
+  border-left: 3px solid;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 0.9rem 1.2rem;
+  margin: 1rem 0;
+  font-size: 0.87rem;
+  line-height: 1.72;
+}
+.hl-gold  { background: rgba(232,184,75,0.07);  border-color: var(--gold);   color: #d4a84a; }
+.hl-blue  { background: rgba(91,156,246,0.07);  border-color: var(--blue);   color: #7aaffa; }
+.hl-green { background: rgba(76,175,128,0.07);  border-color: var(--green);  color: #6ac89a; }
+.hl-red   { background: rgba(240,112,112,0.07); border-color: var(--red);    color: #f09090; }
+.hl-purple{ background: rgba(167,139,250,0.07); border-color: var(--purple); color: #c0a8fb; }
+.hl-teal  { background: rgba(56,192,192,0.07);  border-color: var(--teal);   color: #55d0d0; }
+
+/* ═══════════════════════════════════════════
+   DEFINITION BOX
+═══════════════════════════════════════════ */
+.def-box {
+  position: relative;
+  background: linear-gradient(135deg, rgba(232,184,75,0.06) 0%, rgba(91,156,246,0.06) 100%);
+  border: 1px solid rgba(232,184,75,0.2);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.8rem;
+  margin: 1.2rem 0;
+  overflow: hidden;
+}
+.def-box::after {
+  content: '❝';
+  position: absolute;
+  bottom: -0.5rem; right: 1rem;
+  font-size: 4rem;
+  color: rgba(232,184,75,0.06);
+  font-family: Georgia, serif;
+  line-height: 1;
+  pointer-events: none;
+}
+.def-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+.def-text {
+  font-size: 0.93rem;
+  color: var(--text);
+  font-style: italic;
+  line-height: 1.78;
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════
+   FORMULA / CODE
+═══════════════════════════════════════════ */
+.formula {
+  display: inline-block;
+  font-family: var(--font-mono);
+  background: var(--surface3);
+  border: 1px solid var(--border2);
+  color: var(--green);
+  padding: 0.25rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.formula-block {
+  display: block;
+  font-family: var(--font-mono);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green);
+  color: var(--green);
+  padding: 0.8rem 1.2rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.9rem;
+  margin: 0.8rem 0;
+}
+
+/* ═══════════════════════════════════════════
+   TABLES
+═══════════════════════════════════════════ */
+.table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  margin: 1rem 0;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+thead tr { background: var(--surface2); }
+th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+  color: var(--text-2);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  font-weight: 500;
+}
+td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid rgba(42,50,69,0.5);
+  color: var(--text-2);
+  vertical-align: middle;
+}
+tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: rgba(255,255,255,0.015); }
+td strong { color: var(--text); }
+
+/* ═══════════════════════════════════════════
+   BADGES / TAGS
+═══════════════════════════════════════════ */
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+.badge-gold   { background: rgba(232,184,75,0.15); color: var(--gold); }
+.badge-blue   { background: rgba(91,156,246,0.15); color: var(--blue); }
+.badge-green  { background: rgba(76,175,128,0.15); color: var(--green); }
+.badge-red    { background: rgba(240,112,112,0.15); color: var(--red); }
+.badge-purple { background: rgba(167,139,250,0.15); color: var(--purple); }
+.badge-teal   { background: rgba(56,192,192,0.15); color: var(--teal); }
+
+.tag {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid;
+  margin: 0.2rem;
+}
+
+/* ═══════════════════════════════════════════
+   TREND BOXES
+═══════════════════════════════════════════ */
+.trend-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1.2rem;
+  margin: 0.5rem 0;
+}
+.trend-label { font-size: 0.85rem; color: var(--text-2); flex: 1; }
+.trend-up   { color: var(--green);  font-weight: 700; font-size: 0.9rem; }
+.trend-down { color: var(--red);    font-weight: 700; font-size: 0.9rem; }
+.trend-same { color: var(--gold);   font-weight: 700; font-size: 0.9rem; }
+
+/* ═══════════════════════════════════════════
+   ACCORDION
+═══════════════════════════════════════════ */
+.accordion {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: 0.6rem;
+}
+.accordion-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.2rem;
+  background: var(--surface2);
+  cursor: pointer;
+  font-size: 0.87rem;
+  font-weight: 500;
+  color: var(--text);
+  transition: background 0.2s;
+  user-select: none;
+}
+.accordion-head:hover { background: var(--surface3); }
+.accordion-icon {
+  color: var(--text-3);
+  font-size: 0.7rem;
+  transition: transform 0.25s;
+  flex-shrink: 0;
+}
+.accordion.open .accordion-icon { transform: rotate(180deg); }
+.accordion-body {
+  display: none;
+  padding: 1.1rem 1.4rem;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  font-size: 0.86rem;
+  color: var(--text-2);
+  line-height: 1.75;
+}
+.accordion.open .accordion-body { display: block; }
+
+/* ═══════════════════════════════════════════
+   TIMELINE
+═══════════════════════════════════════════ */
+.timeline { position: relative; padding-left: 1.8rem; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px; top: 0; bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+.tl-item { position: relative; margin-bottom: 1.6rem; }
+.tl-dot {
+  position: absolute;
+  left: -1.5rem;
+  top: 0.25rem;
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+}
+.tl-name { font-size: 0.93rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
+.tl-text { font-size: 0.84rem; color: var(--text-2); line-height: 1.68; }
+
+/* ═══════════════════════════════════════════
+   ISO ION BOXES
+═══════════════════════════════════════════ */
+.iso-row { display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 0.8rem 0; }
+.iso-item {
+  text-align: center;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 1rem;
+  min-width: 75px;
+}
+.iso-ion { font-family: var(--font-mono); font-size: 1rem; color: var(--gold); font-weight: 500; }
+.iso-sub { font-size: 0.72rem; color: var(--text-3); margin-top: 0.2rem; }
+.iso-size { font-size: 0.78rem; color: var(--green); font-weight: 500; }
+
+/* ═══════════════════════════════════════════
+   QUIZ
+═══════════════════════════════════════════ */
+.quiz-box {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.quiz-q {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 1.1rem;
+  line-height: 1.6;
+}
+.quiz-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+.quiz-opt {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.9rem;
+  font-size: 0.83rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  color: var(--text-2);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+.quiz-opt:hover:not(:disabled) { background: rgba(91,156,246,0.1); border-color: var(--blue); color: var(--blue); }
+.quiz-opt.correct { background: rgba(76,175,128,0.15); border-color: var(--green); color: var(--green); cursor: default; }
+.quiz-opt.wrong   { background: rgba(240,112,112,0.12); border-color: var(--red);   color: var(--red);   cursor: default; }
+.quiz-opt:disabled { cursor: default; opacity: 0.5; }
+.quiz-feedback {
+  display: none;
+  margin-top: 0.9rem;
+  font-size: 0.83rem;
+  padding: 0.65rem 1rem;
+  border-radius: 6px;
+  line-height: 1.6;
+}
+.quiz-feedback.show { display: block; }
+.feedback-correct { background: rgba(76,175,128,0.1); color: #7ac99a; border: 1px solid rgba(76,175,128,0.25); }
+.feedback-wrong   { background: rgba(240,112,112,0.1); color: #f09090; border: 1px solid rgba(240,112,112,0.25); }
+
+/* ═══════════════════════════════════════════
+   SUMMARY TABLE SPECIAL COLORS
+═══════════════════════════════════════════ */
+.up-cell   { color: var(--green); font-weight: 600; font-family: var(--font-mono); font-size: 0.82rem; }
+.down-cell { color: var(--red);   font-weight: 600; font-family: var(--font-mono); font-size: 0.82rem; }
+.same-cell { color: var(--gold);  font-weight: 600; font-family: var(--font-mono); font-size: 0.82rem; }
+.mixed-cell{ color: var(--teal);  font-weight: 600; font-family: var(--font-mono); font-size: 0.82rem; }
+
+/* ═══════════════════════════════════════════
+   COMPARE TABLE (Alkali vs Halogens)
+═══════════════════════════════════════════ */
+.compare-table td:nth-child(2) { color: var(--gold); }
+.compare-table td:nth-child(3) { color: var(--blue); }
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════ */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spinRev { to { transform: rotate(-360deg); } }
+
+/* ═══════════════════════════════════════════
+   PERIOD MINI BLOCKS
+═══════════════════════════════════════════ */
+.period-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.9rem;
+  font-size: 0.82rem;
+  color: var(--text-2);
+  margin: 0.25rem;
+}
+.period-num {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--gold);
+  font-size: 0.95rem;
+}
+
+/* ═══════════════════════════════════════════
+   MOBILE HAMBURGER
+═══════════════════════════════════════════ */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 1rem; left: 1rem;
+  z-index: 1000;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 270px;
+    height: 100vh;
+    z-index: 999;
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+  }
+  .sidebar.open { transform: translateX(0); }
+  .hamburger { display: flex; }
+  .main-content { padding: 1.5rem 1.2rem; }
+  .two-col, .three-col, .four-col { grid-template-columns: 1fr; }
+  .cards-grid { grid-template-columns: 1fr 1fr; }
+  .quiz-options { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 500px) {
+  .hero-stats { gap: 1.5rem; }
+  .stat-number { font-size: 2rem; }
+  .cards-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     HERO SECTION
+════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <canvas class="hero-canvas" id="heroCanvas"></canvas>
+
+  <!-- Floating element labels -->
+  <div class="hero-float" style="font-size:8rem;top:5%;left:3%;transform:rotate(-15deg)">Na</div>
+  <div class="hero-float" style="font-size:6rem;top:10%;right:5%;transform:rotate(10deg)">Fe</div>
+  <div class="hero-float" style="font-size:5rem;bottom:20%;left:8%;transform:rotate(8deg)">Au</div>
+  <div class="hero-float" style="font-size:7rem;bottom:10%;right:3%;transform:rotate(-8deg)">Cl</div>
+  <div class="hero-float" style="font-size:4rem;top:40%;left:1%;transform:rotate(20deg)">He</div>
+  <div class="hero-float" style="font-size:4.5rem;top:35%;right:1%;transform:rotate(-12deg)">Cu</div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Chemistry &nbsp;·&nbsp; Chapter 1</div>
+    <h1>
+      <span class="line1">Periodic Table,</span>
+      <span class="line2">Periodic Properties</span>
+      <span class="line3">&amp; Variations of Properties</span>
+    </h1>
+    <p class="hero-desc">A complete interactive study guide covering the modern periodic table, all groups, periods, and six key periodic properties with trends, tables, and practice questions.</p>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-number">118</div><div class="stat-label">Elements</div></div>
+      <div class="stat-item"><div class="stat-number">18</div><div class="stat-label">Groups</div></div>
+      <div class="stat-item"><div class="stat-number">7</div><div class="stat-label">Periods</div></div>
+
+    </div>
+    <button class="hero-cta" onclick="document.getElementById('appSection').scrollIntoView({behavior:'smooth'})">
+      Start Learning <span class="arrow">↓</span>
+    </button>
+  </div>
+</section>
+
+<!-- Mobile hamburger -->
+<button class="hamburger" id="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+
+<!-- ════════════════════════════════════════
+     APP
+════════════════════════════════════════ -->
+<div class="app" id="appSection">
+
+  <!-- ══ SIDEBAR ══ -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <div class="sidebar-logo">📚 Chapter 1</div>
+      <div class="sidebar-sub">Periodic Table &amp; Properties</div>
+    </div>
+
+    <div class="nav-group-label">Introduction</div>
+    <div class="nav-item active" onclick="showSection('intro',this)" data-section="intro">
+      <span class="nav-icon">🏠</span> Introduction
+    </div>
+
+    <div class="nav-group-label">Table Structure</div>
+    <div class="nav-item" onclick="toggleSub('groups-sub',this)" data-sub="groups-sub">
+      <span class="nav-icon">🔢</span> Groups <span class="nav-chevron">›</span>
+    </div>
+    <div class="nav-sub" id="groups-sub" style="display:none">
+      <div class="nav-sub-item" onclick="showSection('groups',null)">Group Overview</div>
+      <div class="nav-sub-item" onclick="showSection('groups',null)">Types of Groups</div>
+      <div class="nav-sub-item" onclick="showSection('groups',null)">S, P, D, F Blocks</div>
+    </div>
+
+    <div class="nav-item" onclick="toggleSub('periods-sub',this)" data-sub="periods-sub">
+      <span class="nav-icon">📏</span> Periods <span class="nav-chevron">›</span>
+    </div>
+    <div class="nav-sub" id="periods-sub" style="display:none">
+      <div class="nav-sub-item" onclick="showSection('periods',null)">Period Table</div>
+      <div class="nav-sub-item" onclick="showSection('periods',null)">Valency</div>
+      <div class="nav-sub-item" onclick="showSection('periods',null)">Shells &amp; Orbits</div>
+    </div>
+
+    <div class="nav-group-label">Periodicity</div>
+    <div class="nav-item" onclick="showSection('periodicity',this)" data-section="periodicity">
+      <span class="nav-icon">🔄</span> Periodicity
+    </div>
+
+    <div class="nav-group-label">Periodic Properties</div>
+    <div class="nav-item" onclick="showSection('atomicsize',this)" data-section="atomicsize">
+      <span class="nav-icon">🔬</span> Atomic Size
+    </div>
+    <div class="nav-item" onclick="showSection('metallic',this)" data-section="metallic">
+      <span class="nav-icon">⚙️</span> Metallic Character
+    </div>
+    <div class="nav-item" onclick="showSection('nonmetallic',this)" data-section="nonmetallic">
+      <span class="nav-icon">⚗️</span> Non-metallic Character
+    </div>
+    <div class="nav-item" onclick="showSection('ionisation',this)" data-section="ionisation">
+      <span class="nav-icon">⚡</span> Ionisation Energy
+    </div>
+    <div class="nav-item" onclick="showSection('ea',this)" data-section="ea">
+      <span class="nav-icon">🧲</span> Electron Affinity
+    </div>
+    <div class="nav-item" onclick="showSection('en',this)" data-section="en">
+      <span class="nav-icon">⚖️</span> Electronegativity
+    </div>
+
+    <div class="nav-group-label">Special Topics</div>
+    <div class="nav-item" onclick="showSection('massnumber',this)" data-section="massnumber">
+      <span class="nav-icon">⚛️</span> Atomic &amp; Mass Number
+    </div>
+    <div class="nav-item" onclick="showSection('comparison',this)" data-section="comparison">
+      <span class="nav-icon">📊</span> Alkali Metals vs Halogens
+    </div>
+    <div class="nav-item" onclick="showSection('summary',this)" data-section="summary">
+      <span class="nav-icon">📋</span> Summary Table
+    </div>
+    <div class="nav-item" onclick="showSection('quiz',this)" data-section="quiz">
+      <span class="nav-icon">🎯</span> Practice Quiz <span style="margin-left:auto;font-family:var(--font-mono);font-size:0.68rem;background:rgba(232,184,75,0.15);color:var(--gold);padding:1px 7px;border-radius:10px">20 Qs</span>
+    </div>
+  </nav>
+
+  <!-- ══ MAIN CONTENT ══ -->
+  <div class="main-content">
+
+    <!-- ═══════════════════════════════════
+         SECTION: INTRODUCTION
+    ═══════════════════════════════════ -->
+    <div class="section active" id="intro">
+      <div class="section-header">
+        <div class="section-eyebrow">Introduction</div>
+        <h2 class="section-title">The Periodic Table</h2>
+        <p class="section-sub">A tabular arrangement of elements in groups (vertical columns) and periods (horizontal rows) highlighting the regular trends in properties of elements.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-title">What is an Element?</div>
+        <p>Elements are <strong>pure substances made up of one type of atoms</strong>. They are the basic units of all types of matter. In order to study elements in an organised manner, they need to be classified.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Historical Development of the Periodic Table</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot" style="background:var(--purple); box-shadow:0 0 0 3px var(--bg)"></div>
+            <div class="tl-name">Döbereiner — Law of Triads</div>
+            <div class="tl-text">Grouped elements in sets of three (triads) based on atomic mass similarities. The middle element's atomic mass was approximately the average of the other two.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="background:var(--blue); box-shadow:0 0 0 3px var(--bg)"></div>
+            <div class="tl-name">Newland — Law of Octaves</div>
+            <div class="tl-text">When elements are arranged in increasing order of their atomic mass, <em>every eighth element beginning from any element resembles the first</em> element in its physical and chemical properties. Limited to 56 elements.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="background:var(--green); box-shadow:0 0 0 3px var(--bg)"></div>
+            <div class="tl-name">Dmitri Mendeleev — First Periodic Table (1869)</div>
+            <div class="tl-text"><em>"The properties of elements are the periodic functions of their atomic masses."</em> Arranged 63 known elements in vertical columns (groups) and horizontal rows (periods). Predicted existence of undiscovered elements. <strong>Limitation:</strong> Could not explain positions of rare earth metals and isotopes.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="background:var(--gold); box-shadow:0 0 0 3px var(--bg)"></div>
+            <div class="tl-name">Henry Moseley — Modern Periodic Law</div>
+            <div class="tl-text"><em>"The physical and chemical properties of elements are the periodic functions of their <strong>atomic number</strong>."</em> This resolved all defects of Mendeleev's table. Niel Bohr later gave the extended long form of the modern periodic table.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="def-box">
+        <div class="def-label">Modern Periodic Law — Henry Moseley</div>
+        <div class="def-text">The physical and chemical properties of elements are the periodic functions of their atomic number.</div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">IUPAC Group Notation</div>
+        <p>According to the recommendation of <strong>IUPAC</strong> (International Union of Pure and Applied Chemistry), groups are numbered <strong>1 to 18</strong>, replacing the older notation IA…VIIA, VIII, IB…IIB and 0. Both notations are accepted in examinations.</p>
+        <div class="table-wrap" style="margin-top:1rem">
+          <table>
+            <thead>
+              <tr>
+                <th>Notation</th><th>IA</th><th>IIA</th><th>IIIB</th><th>IVB</th><th>VB</th><th>VIB</th><th>VIIB</th><th>VIII(3)</th><th>IB</th><th>IIB</th><th>IIIA</th><th>IVA</th><th>VA</th><th>VIA</th><th>VIIA</th><th>0</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Old</strong></td><td>IA</td><td>IIA</td><td>IIIB</td><td>IVB</td><td>VB</td><td>VIB</td><td>VIIB</td><td>VIII</td><td>IB</td><td>IIB</td><td>IIIA</td><td>IVA</td><td>VA</td><td>VIA</td><td>VIIA</td><td>0</td>
+              </tr>
+              <tr>
+                <td><strong>New (IUPAC)</strong></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8, 9, 10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         SECTION: GROUPS
+    ═══════════════════════════════════ -->
+    <div class="section" id="groups">
+      <div class="section-header">
+        <div class="section-eyebrow">Table Structure</div>
+        <h2 class="section-title">Groups of the Periodic Table</h2>
+        <p class="section-sub">The modern periodic table has <strong>eighteen vertical columns</strong> known as groups, arranged from left to right.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-title">All 18 Groups at a Glance</div>
+        <div class="cards-grid">
+          <div class="card" style="--card-top:var(--gold)">
+            <div class="card-icon">🔥</div>
+            <div class="card-title">Group 1 — Alkali Metals</div>
+            <div class="card-body">Li, Na, K, Rb, Cs, Fr. Form strong alkalis with water. One valence electron. Highly reactive metals. Metallic character increases going down the group.</div>
+          </div>
+          <div class="card" style="--card-top:var(--blue)">
+            <div class="card-icon">🌍</div>
+            <div class="card-title">Group 2 — Alkaline Earth Metals</div>
+            <div class="card-body">Be, Mg, Ca, Sr, Ba, Ra. Form weaker alkalis compared to Group 1. Two valence electrons. Good reducing agents.</div>
+          </div>
+          <div class="card" style="--card-top:var(--green)">
+            <div class="card-icon">⚙️</div>
+            <div class="card-title">Groups 3–12 — Transition Elements</div>
+            <div class="card-body">d-block elements. Two outermost shells incomplete. Include Fe, Cu, Zn, Ni, Co. Variable valency. Good conductors.</div>
+          </div>
+          <div class="card" style="--card-top:var(--purple)">
+            <div class="card-icon">🅱️</div>
+            <div class="card-title">Group 13 — Boron Family</div>
+            <div class="card-body">B, Al, Ga, In, Tl. Boron is the first member and a metalloid. Three valence electrons. Al is most widely used metal.</div>
+          </div>
+          <div class="card" style="--card-top:var(--gold)">
+            <div class="card-icon">💎</div>
+            <div class="card-title">Group 14 — Carbon Family</div>
+            <div class="card-body">C, Si, Ge, Sn, Pb. Four valence electrons. Carbon shows catenation. Silicon is a semiconductor widely used in electronics.</div>
+          </div>
+          <div class="card" style="--card-top:var(--blue)">
+            <div class="card-icon">💨</div>
+            <div class="card-title">Group 15 — Nitrogen Family</div>
+            <div class="card-body">N, P, As, Sb, Bi. Five valence electrons. N₂ forms 78% of air. Essential for biological molecules like DNA.</div>
+          </div>
+          <div class="card" style="--card-top:var(--green)">
+            <div class="card-icon">⛏️</div>
+            <div class="card-title">Group 16 — Chalcogens</div>
+            <div class="card-body">O, S, Se, Te, Po. "Ore-forming" elements. Six valence electrons. Oxygen is most abundant element on Earth's crust.</div>
+          </div>
+          <div class="card" style="--card-top:var(--red)">
+            <div class="card-icon">🧂</div>
+            <div class="card-title">Group 17 — Halogens</div>
+            <div class="card-body">F, Cl, Br, I, At. "Salt formers". Seven valence electrons. Highly reactive non-metals. Strong oxidising agents. Diatomic molecules.</div>
+          </div>
+          <div class="card" style="--card-top:var(--teal)">
+            <div class="card-icon">🫧</div>
+            <div class="card-title">Group 18 — Noble Gases (Zero Group)</div>
+            <div class="card-body">He, Ne, Ar, Kr, Xe, Rn. Inert gases. Outermost shell is complete. Extremely stable electronic configuration. Barely react.</div>
+          </div>
+        </div>
+
+        <div class="hl hl-blue">
+          <strong>Main Group / Representative Elements:</strong> Groups 1, 2, 13, 14, 15, 16 and 17 are known as main group elements, representative elements, or normal elements. The outermost shell of all these elements is <em>incomplete</em>. Group 18 (noble gases) is the exception — their outermost shell is complete.
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">S, P, D, F Blocks</div>
+        <div class="four-col">
+          <div class="card" style="--card-top:var(--gold)">
+            <div class="card-title" style="color:var(--gold)">s-block</div>
+            <div class="card-body">Groups 1 &amp; 2. Last electron enters the s-orbital. Includes alkali metals and alkaline earth metals.</div>
+          </div>
+          <div class="card" style="--card-top:var(--blue)">
+            <div class="card-title" style="color:var(--blue)">p-block</div>
+            <div class="card-body">Groups 13–18. Last electron enters the p-orbital. Includes non-metals, metalloids, and noble gases.</div>
+          </div>
+          <div class="card" style="--card-top:var(--green)">
+            <div class="card-title" style="color:var(--green)">d-block</div>
+            <div class="card-body">Groups 3–12. Last electron enters the d-orbital. Transition elements. Two outermost shells incomplete.</div>
+          </div>
+          <div class="card" style="--card-top:var(--red)">
+            <div class="card-title" style="color:var(--red)">f-block</div>
+            <div class="card-body">Lanthanides &amp; Actinides. Inner transition elements. Last electron enters the f-orbital. Shown separately below main table.</div>
+          </div>
+        </div>
+        <div class="hl hl-gold">
+          <strong>Typical Elements:</strong> The third period elements — Na, Mg, Al, Si, P, S and Cl — summarise the properties of their respective groups and are called <em>typical elements</em>.
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         SECTION: PERIODS
+    ═══════════════════════════════════ -->
+    <div class="section" id="periods">
+      <div class="section-header">
+        <div class="section-eyebrow">Table Structure</div>
+        <h2 class="section-title">Periods of the Periodic Table</h2>
+        <p class="section-sub">There are <strong>seven horizontal rows</strong> in the modern periodic table. The number of shells present in an atom determines its period.</p>
+      </div>
+
+      <div class="block">
+        <div class="block-title">All 7 Periods</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Period</th><th>Type</th><th>No. of Elements</th><th>Atomic No. Range</th><th>No. of Shells</th><th>First Element</th><th>Last Element</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>1</strong></td><td><span class="badge badge-blue">Shortest</span></td><td>2</td><td>1 – 2</td><td>1</td><td>H (1)</td><td>He (2)</td></tr>
+              <tr><td><strong>2</strong></td><td><span class="badge badge-green">Short</span></td><td>8</td><td>3 – 10</td><td>2</td><td>Li (3)</td><td>Ne (10)</td></tr>
+              <tr><td><strong>3</strong></td><td><span class="badge badge-green">Short</span></td><td>8</td><td>11 – 18</td><td>3</td><td>Na (11)</td><td>Ar (18)</td></tr>
+              <tr><td><strong>4</strong></td><td><span class="badge badge-gold">Long</span></td><td>18</td><td>19 – 36</td><td>4</td><td>K (19)</td><td>Kr (36)</td></tr>
+              <tr><td><strong>5</strong></td><td><span class="badge badge-gold">Long</span></td><td>18</td><td>37 – 54</td><td>5</td><td>Rb (37)</td><td>Xe (54)</td></tr>
+              <tr><td><strong>6</strong></td><td><span class="badge badge-red">Longest</span></td><td>32</td><td>55 – 86</td><td>6</td><td>Cs (55)</td><td>Rn (86)</td></tr>
+              <tr><td><strong>7</strong></td><td><span class="badge badge-purple">Incomplete</span></td><td>32</td><td>87 – 118</td><td>7</td><td>Fr (87)</td><td>Uuo (118)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="hl hl-gold">
+          <strong>Key Rule:</strong> A period is determined by the <em>number of shells</em>, and a group is determined by the <em>number of electrons in the outermost shell</em>. For example: Sodium has atomic number 11 and electronic configuration 2, 8, 1 → 3 shells = Period 3, 1 valence electron = Group 1.
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Valency</div>
+        <p>Valency denotes the <strong>combining capacity</strong> of the atom of an element. It is equal to the number of electrons an atom can donate, accept, or share.</p>
+        <div class="hl hl-blue">
+          On moving down a given group, the number of electrons in the outermost shell (valence electrons) <strong>remains the same</strong>. Therefore, <em>valency in a group remains the same</em>. Across a period, valency increases up to Group 14 (valency = 4), then decreases — in Group 17 it becomes 1.
+        </div>
+        <div class="hl hl-green">
+          <strong>Valency Rule:</strong><br>
+          • If outer shell electrons = 1, 2, 3, or 4 → Valency = those electrons<br>
+          • If outer shell electrons = 5, 6, or 7 → Valency = 8 − outer electrons<br>
+          • Example: N has 5 outer electrons → Valency = 8 − 5 = <strong>3</strong><br>
+          • Valency is always positive (Note 2).
+        </div>
+
+        <div class="sub-title">2nd Period Elements — Valency Table</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Group (Old)</th><th>IA (1)</th><th>IIA (2)</th><th>IIIA (13)</th><th>IVA (14)</th><th>VA (15)</th><th>VIA (16)</th><th>VIIA (17)</th><th>Zero (18)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Element</strong></td><td>Li</td><td>Be</td><td>B</td><td>C</td><td>N</td><td>O</td><td>F</td><td>Ne</td></tr>
+              <tr><td><strong>Atomic No.</strong></td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+              <tr><td><strong>Config.</strong></td><td>KL 2,1</td><td>KL 2,2</td><td>KL 2,3</td><td>KL 2,4</td><td>KL 2,5</td><td>KL 2,6</td><td>KL 2,7</td><td>KL 2,8</td></tr>
+              <tr><td><strong>No. of Shells</strong></td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+              <tr><td><strong>Valency</strong></td><td>1</td><td>2</td><td>3</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
+              <tr><td><strong>Hydride Formula</strong></td><td>LiH</td><td>BeH₂</td><td>BH₃</td><td>CH₄</td><td>NH₃</td><td>H₂O</td><td>HF</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Shells (Orbits)</div>
+        <p>Electrons revolve around the nucleus in certain definite circular paths called <strong>orbits</strong> or <strong>shells</strong> (designated K, L, M, N, O, P from innermost to outermost).</p>
+        <div class="hl hl-gold">Number of shells in an element = Period number to which that element belongs.</div>
+
+        <div class="sub-title">Down a Group — Shells Increase (Example: Group 17 Halogens)</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Element</th><th>Atomic No.</th><th>No. of Shells</th><th>Electronic Config. (KLMNO P)</th><th>Period</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>F (Fluorine)</strong></td><td>9</td><td>2</td><td>2, 7</td><td>Second</td></tr>
+              <tr><td><strong>Cl (Chlorine)</strong></td><td>17</td><td>3</td><td>2, 8, 7</td><td>Third</td></tr>
+              <tr><td><strong>Br (Bromine)</strong></td><td>35</td><td>4</td><td>2, 8, 18, 7</td><td>Fourth</td></tr>
+              <tr><td><strong>I (Iodine)</strong></td><td>53</td><td>5</td><td>2, 8, 18, 18, 7</td><td>Fifth</td></tr>
+              <tr><td><strong>At (Astatine)</strong></td><td>85</td><td>6</td><td>2, 8, 18, 32, 18, 7</td><td>Sixth</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sub-title">Across a Period — Shells Stay the Same</div>
+        <p>In the 2nd period, the number of shells = 2 for all elements (Li → Ne). In the 3rd period, the number of shells = 3 for all elements (Na → Ar) and so on.</p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         SECTION: PERIODICITY
+    ═══════════════════════════════════ -->
+    <div class="section" id="periodicity">
+      <div class="section-header">
+        <div class="section-eyebrow">Core Concept</div>
+        <h2 class="section-title">Periodicity of Elements</h2>
+        <p class="section-sub">Properties that reappear at regular intervals or show gradual variation at regular intervals are called <em>periodic properties</em>.</p>
+      </div>
+
+      <div class="def-box">
+        <div class="def-label">Definition — Periodicity</div>
+        <div class="def-text">The properties that reappear at regular intervals, or in which there is gradual variation (i.e. increase or decrease) at regular intervals, are called <em>'periodic properties'</em> and the phenomenon is known as the <em>periodicity of elements</em>.</div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Cause of Periodicity</div>
+        <div class="def-box" style="border-color:rgba(91,156,246,0.3)">
+          <div class="def-label">Root Cause</div>
+          <div class="def-text">The cause of periodicity is the <strong>recurrence of similar electronic configuration</strong> i.e. having the same number of electrons in the outermost orbit.</div>
+        </div>
+        <p>In a particular group, electrons in the outermost orbit remain the same — i.e. <strong>electronic configuration is similar</strong>. Since chemical properties of elements depend upon the number of electrons in their outermost shell, elements of the same group have similar properties.</p>
+
+        <div class="sub-title">Example — Group 17 (Halogens)</div>
+        <p>All halogens have <strong>7 electrons</strong> in their outermost shells. They share these common properties:</p>
+        <div style="margin-top:0.8rem">
+          <span class="tag" style="border-color:var(--blue);color:var(--blue)">Coloured non-metals</span>
+          <span class="tag" style="border-color:var(--green);color:var(--green)">Form negative ions (Cl⁻)</span>
+          <span class="tag" style="border-color:var(--red);color:var(--red)">Very reactive</span>
+          <span class="tag" style="border-color:var(--purple);color:var(--purple)">Found in combined state</span>
+          <span class="tag" style="border-color:var(--gold);color:var(--gold)">Good oxidising agents</span>
+          <span class="tag" style="border-color:var(--teal);color:var(--teal)">Slightly soluble in water</span>
+          <span class="tag" style="border-color:var(--blue);color:var(--blue)">M.P. &amp; B.P. increase down group</span>
+          <span class="tag" style="border-color:var(--green);color:var(--green)">Dissolve better in organic solvents</span>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">6 Important Periodic Properties</div>
+        <div class="cards-grid">
+          <div class="card" style="--card-top:var(--gold)">
+            <div class="card-icon">📐</div>
+            <div class="card-title">Atomic Size (Atomic Radius)</div>
+            <div class="card-body">Distance between the centre of the nucleus of an atom and its outermost shell. Measured in pm or Å.</div>
+          </div>
+          <div class="card" style="--card-top:var(--blue)">
+            <div class="card-icon">⚙️</div>
+            <div class="card-title">Metallic Character</div>
+            <div class="card-body">Tendency to lose valence electrons and form a positive ion (cation). Metals are reducing agents.</div>
+          </div>
+          <div class="card" style="--card-top:var(--green)">
+            <div class="card-icon">⚗️</div>
+            <div class="card-title">Non-metallic Character</div>
+            <div class="card-body">Tendency to gain electrons to attain octet in outermost orbit. Non-metals are oxidising agents.</div>
+          </div>
+          <div class="card" style="--card-top:var(--red)">
+            <div class="card-icon">⚡</div>
+            <div class="card-title">Ionisation Potential (I.E.)</div>
+            <div class="card-body">Energy required to remove an electron from a neutral isolated gaseous atom. Unit: kJ mol⁻¹ or eV/atom.</div>
+          </div>
+          <div class="card" style="--card-top:var(--purple)">
+            <div class="card-icon">🧲</div>
+            <div class="card-title">Electron Affinity (E.A.)</div>
+            <div class="card-body">Energy released when an extra electron is added to a neutral isolated gaseous atom. Represented by negative sign.</div>
+          </div>
+          <div class="card" style="--card-top:var(--teal)">
+            <div class="card-icon">⚖️</div>
+            <div class="card-title">Electronegativity (E.N.)</div>
+            <div class="card-body">Tendency of an atom in a molecule to attract the shared pair of electrons towards itself. Dimensionless quantity.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         SECTION: ATOMIC SIZE
+    ═══════════════════════════════════ -->
+    <div class="section" id="atomicsize">
+      <div class="section-header">
+        <div class="section-eyebrow">Periodic Property 1</div>
+        <h2 class="section-title">Atomic Size (Atomic Radius)</h2>
+        <p class="section-sub">It is the distance between the centre of the nucleus of an atom and its outermost shell.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="def-box">
+          <div class="def-label">Definition</div>
+          <div class="def-text">Atomic radius = distance from nucleus centre to outermost shell. Also defined as half the inter-nuclear distance between combined atoms in a molecule.</div>
+        </div>
+        <div class="block" style="margin-bottom:0">
+          <div class="block-title">Units of Atomic Size</div>
+          <p>Angstrom (Å): &nbsp;<span class="formula">1 Å = 10⁻¹⁰ m</span></p>
+          <p style="margin-top:0.6rem">Picometre (pm): &nbsp;<span class="formula">1 pm = 10⁻¹² m</span></p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Atomic Size Depends On</div>
+        <div class="two-col">
+          <div>
+            <div class="sub-title">Number of Shells</div>
+            <p>An increase in the number of shells <strong>increases</strong> the size of an atom because the distance between the outermost shell and the nucleus increases.</p>
+          </div>
+          <div>
+            <div class="sub-title">Nuclear Charge</div>
+            <p>An increase in nuclear charge <strong>decreases</strong> the size of the atom because electrons are attracted towards the nucleus with a greater force, bringing the outermost shell closer.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Trends in Atomic Size</div>
+        <div class="two-col">
+          <div>
+            <div class="sub-title">↓ Down a Group — Atomic Size INCREASES</div>
+            <div class="trend-box"><span class="trend-label">Atomic Size — Down a Group</span><span class="trend-up">↑ Increases</span></div>
+            <p><strong>Reason:</strong> Addition of new shells overweighs the increased nuclear charge. As one moves from one period to the next in a group, successive shells are added.</p>
+            <div class="table-wrap" style="margin-top:1rem">
+              <table>
+                <thead><tr><th>Element (Group 1)</th><th>Z</th><th>Radius (pm)</th><th>Config.</th></tr></thead>
+                <tbody>
+                  <tr><td>Hydrogen (H)</td><td>1</td><td>37</td><td>1</td></tr>
+                  <tr><td>Lithium (Li)</td><td>3</td><td>152</td><td>2, 1</td></tr>
+                  <tr><td>Sodium (Na)</td><td>11</td><td>186</td><td>2, 8, 1</td></tr>
+                  <tr><td>Potassium (K)</td><td>19</td><td>231</td><td>2, 8, 8, 1</td></tr>
+                  <tr><td>Rubidium (Rb)</td><td>37</td><td>244</td><td>2, 8, 18, 8, 1</td></tr>
+                  <tr><td>Caesium (Cs)</td><td>55</td><td>262</td><td>2, 8, 18, 18, 8, 1</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="margin-top:0.5rem; font-size:0.8rem">Group 17: F (64 pm) &lt; Cl (99 pm) &lt; Br (114 pm) &lt; I (133 pm) &lt; At (140 pm)</p>
+          </div>
+          <div>
+            <div class="sub-title">→ Across a Period — Atomic Size DECREASES</div>
+            <div class="trend-box"><span class="trend-label">Atomic Size — Across Period</span><span class="trend-down">↓ Decreases</span></div>
+            <p><strong>Reason:</strong> The nuclear charge (atomic number) increases from left to right in the same period, thereby bringing the outermost shell closer to the nucleus. Number of shells remains the same.</p>
+            <div class="table-wrap" style="margin-top:1rem">
+              <table>
+                <thead><tr><th>Element (Period 2)</th><th>Z</th><th>Radius (pm)</th></tr></thead>
+                <tbody>
+                  <tr><td>Lithium (Li)</td><td>3</td><td>152</td></tr>
+                  <tr><td>Beryllium (Be)</td><td>4</td><td>112</td></tr>
+                  <tr><td>Boron (B)</td><td>5</td><td>88</td></tr>
+                  <tr><td>Carbon (C)</td><td>6</td><td>77</td></tr>
+                  <tr><td>Nitrogen (N)</td><td>7</td><td>70</td></tr>
+                  <tr><td>Oxygen (O)</td><td>8</td><td>66</td></tr>
+                  <tr><td>Fluorine (F)</td><td>9</td><td>64</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="margin-top:0.5rem; font-size:0.8rem">3rd period: Na (186) &gt; Mg (160) &gt; Al (143) &gt; Si (117) &gt; P (110) &gt; S (104) &gt; Cl (99) pm</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Special Cases — Ions vs Atoms</div>
+
+        <div class="accordion" id="acc1">
+          <div class="accordion-head" onclick="toggleAcc('acc1')">
+            📌 Note 1: Cation is ALWAYS SMALLER than its parent atom
+            <span class="accordion-icon">▼</span>
+          </div>
+          <div class="accordion-body">
+            <p><strong>Reason:</strong> Cation is formed by the <em>loss</em> of electron(s). After losing electrons, protons &gt; electrons. Electrons are more strongly attracted by the nucleus and are pulled inward. Hence the size decreases.</p>
+            <div class="formula-block">Na (2,8,1) − e⁻ → Na⁺ (2,8)   [Na⁺ is smaller than Na]</div>
+            <div class="formula-block">Mg (2,8,2) − 2e⁻ → Mg²⁺ (2,8)   [Mg²⁺ is smaller than Mg]</div>
+          </div>
+        </div>
+
+        <div class="accordion" id="acc2">
+          <div class="accordion-head" onclick="toggleAcc('acc2')">
+            📌 Note 2: Anion is ALWAYS LARGER than its parent atom
+            <span class="accordion-icon">▼</span>
+          </div>
+          <div class="accordion-body">
+            <p><strong>Reason:</strong> Anion is formed by the <em>gain</em> of electron(s). Thus electrons &gt; protons. The effective positive charge in the nucleus is less, so less inward pull is experienced. Hence the size expands.</p>
+            <div class="formula-block">Cl (2,8,7) + e⁻ → Cl⁻ (2,8,8)   [Cl⁻ is larger than Cl]</div>
+            <div class="formula-block">O (2,6) + 2e⁻ → O²⁻ (2,8)   [O²⁻ is larger than O]</div>
+          </div>
+        </div>
+
+        <div class="accordion" id="acc3">
+          <div class="accordion-head" onclick="toggleAcc('acc3')">
+            📌 Note 3: Isoelectronic Ions — same electrons, different sizes
+            <span class="accordion-icon">▼</span>
+          </div>
+          <div class="accordion-body">
+            <p>Ions having the same number of electrons are called <strong>isoelectronic ions</strong>. Their size depends on the nuclear charge (number of protons). <em>Greater the nuclear charge, smaller the size.</em></p>
+            <div class="iso-row">
+              <div class="iso-item">
+                <div class="iso-ion">Mg²⁺</div>
+                <div class="iso-sub">10 e⁻, 12 p⁺</div>
+                <div class="iso-size">0.65 Å</div>
+              </div>
+              <div class="iso-item">
+                <div class="iso-ion">Na⁺</div>
+                <div class="iso-sub">10 e⁻, 11 p⁺</div>
+                <div class="iso-size">0.95 Å</div>
+              </div>
+              <div class="iso-item">
+                <div class="iso-ion">F⁻</div>
+                <div class="iso-sub">10 e⁻, 9 p⁺</div>
+                <div class="iso-size">1.26 Å</div>
+              </div>
+              <div class="iso-item">
+                <div class="iso-ion">O²⁻</div>
+                <div class="iso-sub">10 e⁻, 8 p⁺</div>
+                <div class="iso-size">1.42 Å</div>
+              </div>
+            </div>
+            <p style="font-size:0.82rem">Mg²⁺ (12 protons) is smallest → Na⁺ → F⁻ → O²⁻ (8 protons) is largest. More protons = smaller size.</p>
+          </div>
+        </div>
+
+        <div class="accordion" id="acc4">
+          <div class="accordion-head" onclick="toggleAcc('acc4')">
+            📌 Note 4: Inert Gas Atomic Size Exception
+            <span class="accordion-icon">▼</span>
+          </div>
+          <div class="accordion-body">
+            <p>The size of inert gas atoms is <strong>bigger</strong> than expected (bigger than the preceding halogen in the same period). This is because the outer shell is complete with the maximum number of electrons. The electronic repulsions are maximum. Hence the size of inert gas atoms is bigger.</p>
+            <p style="margin-top:0.5rem">Example: Argon (Ar) atom is bigger than Chlorine (Cl) atom, even though Cl has a smaller atomic number.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         SECTION: METALLIC CHARACTER
+    ═══════════════════════════════════ -->
+    <div class="section" id="metallic">
+      <div class="section-header">
+        <div class="section-eyebrow">Periodic Property 2</div>
+        <h2 class="section-title">Metallic Character</h2>
+        <p class="section-sub">Those elements which have a tendency to lose their valence electrons and form a positive ion are considered metals.</p>
+      </div>
+
+      <div class="def-box">
+        <div class="def-label">Definition</div>
+        <div class="def-text">Those elements which have a tendency to lose their valence electrons (electrons of the outermost orbit) and form a positive ion, are considered <em>metals</em>. Metals are <strong>reducing agents</strong>. Greater the tendency to lose electrons, stronger is the reducing agent.</div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Metallic Character Depends On</div>
+        <div class="two-col">
+          <div>
+            <div class="sub-title">Atomic Size</div>
+            <p>Greater the atomic size, the farther the outermost orbit, and thus lesser the nuclear pull exerted on it. As a result, electron(s) can be removed more easily from the valence shell → <strong>more metallic</strong>.</p>
+          </div>
+          <div>
+            <div class="sub-title">Nuclear Charge</div>
+            <p>Greater the nuclear charge, greater is the force exerted by the nucleus on the electron(s) of the outermost orbit. This makes it difficult to remove electrons from the outermost orbit → <strong>metallic nature decreases</strong>.</p>
+          </div>
+        </div>
+        <div class="hl hl-gold">
+          <strong>Hydrogen Note:</strong> Hydrogen is a non-metal. It has only one electron and one proton. On losing this electron it forms a cation (H⁺) which has only one proton — therefore its cation is also called a <em>proton</em>.
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Trends in Metallic Character</div>
+        <div class="two-col">
+          <div>
+            <div class="sub-title">↓ Down a Group — Metallic Character INCREASES</div>
+            <div class="trend-box"><span class="trend-label">Metallic Character — Down a Group</span><span class="trend-up">↑ Increases</span></div>
+            <p><strong>Reason:</strong> On moving down a group, the atomic size increases and the nuclear charge also increases. The effect of an increased atomic size is greater as compared to the increased nuclear charge. Therefore, metallic nature increases as one moves down a group (they can lose electrons easily).</p>
+            <p style="margin-top:0.5rem">Group 1 (least → most metallic): Li → Na → K → Rb → Cs</p>
+            <p style="font-size:0.8rem; color:var(--text-3); margin-top:0.3rem">Note: Francium (Fr) is radioactive so its properties are not known.</p>
+          </div>
+          <div>
+            <div class="sub-title">→ Across a Period — Metallic Character DECREASES</div>
+            <div class="trend-box"><span class="trend-label">Metallic Character — Across Period</span><span class="trend-down">↓ Decreases</span></div>
+            <p><strong>Reason:</strong> On moving across a period, nuclear pull increases due to the increase in atomic number, and thus the atomic size decreases. Hence, elements cannot lose electrons easily → metallic nature decreases.</p>
+            <p style="margin-top:0.5rem">2nd period: Li (most metallic) → … → F (non-metal)</p>
+            <p>3rd period: Na (most metallic) → … → Cl (non-metal)</p>
+          </div>
+        </div>
+        <div class="hl hl-gold">
+          <strong>3rd Period Example:</strong> Li | Be → Metals &nbsp;&nbsp;|&nbsp;&nbsp; B → Metalloid &nbsp;&nbsp;|&nbsp;&nbsp; C N O → Non-metals<br>
+          <strong>3rd Period:</strong> Na | Mg | Al → Metals &nbsp;&nbsp;|&nbsp;&nbsp; Si → Metalloid &nbsp;&nbsp;|&nbsp;&nbsp; P | S | Cl → Non-metals
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">3rd Period Elements — Metallic Properties (Table 1.2)</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Group</th><th>GROUP 1</th><th>GROUP 2</th><th>GROUP 13</th><th>GROUP 14</th><th>GROUP 15</th><th>GROUP 16</th><th>GROUP 17</th><th>GROUP 18</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Element</strong></td><td>Na</td><td>Mg</td><td>Al</td><td>Si</td><td>P</td><td>S</td><td>Cl</td><td>Ar</td></tr>
+              <tr><td><strong>Atomic No.</strong></td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td></tr>
+              <tr><td><strong>Config.</strong></td><td>2,8,1</td><td>2,8,2</td><td>2,8,3</td><td>2,8,4</td><td>2,8,5</td><td>2,8,6</td><td>2,8,7</td><td>2,8,8</td></tr>
+              <tr>
+                <td><strong>Nature</strong></td>
+                <td><span class="badge badge-gold">Metal</span></td>
+                <td><span class="badge badge-gold">Metal</span></td>
+                <td><span class="badge badge-gold">Metal</span></td>
+                <td><span class="badge badge-teal">Metalloid</span></td>
+                <td><span class="badge badge-blue">Non-metal</span></td>
+                <td><span class="badge badge-blue">Non-metal</span></td>
+                <td><span class="badge badge-blue">Non-metal</span></td>
+                <td><span class="badge badge-purple">Noble Gas</span></td>
+              </tr>
+              <tr><td><strong>Valency</strong></td><td>1</td><td>2</td><td>3</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Gradation in Physical Properties</div>
+        <div class="two-col">
+          <div>
+            <div class="sub-title">Melting &amp; Boiling Points of Metals — Decrease Down Group</div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Metal</th><th>M.P. (°C)</th><th>B.P. (°C)</th></tr></thead>
+                <tbody>
+                  <tr><td>Li</td><td>180.5</td><td>1347</td></tr>
+                  <tr><td>Na</td><td>94.5</td><td>883</td></tr>
+                  <tr><td>K</td><td>63.5</td><td>774</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="font-size:0.8rem; margin-top:0.4rem; color:var(--text-3)">Metals: M.P. and B.P. decrease going down the group.</p>
+          </div>
+          <div>
+            <div class="sub-title">Density of Group 1 Elements — Increases Down Group</div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Element</th><th>Li</th><th>Na</th><th>K</th><th>Rb</th><th>Cs</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Density (g/cc)</strong></td><td>0.54</td><td>0.97</td><td>0.86</td><td>1.53</td><td>1.87</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="font-size:0.8rem; margin-top:0.4rem; color:var(--text-3)">Density generally increases going down the group.</p>
+          </div>
+        </div>
+        <div class="sub-title" style="margin-top:1rem">Melting Points Across 3rd Period</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element of 3rd Period</th><th>Na</th><th>Mg</th><th>Al</th><th>Si</th><th>P</th><th>S</th></tr></thead>
+            <tbody>
+              <tr><td><strong>M.P. (°C)</strong></td><td>98</td><td>650</td><td>660</td><td>1410</td><td>44.2</td><td>115.2</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Across a period, melting point and boiling point usually <strong>increases up to Group 14 (IVA)</strong> and then decreases. Density also increases gradually to a maximum across a period and then slight decrease may be noticed.</p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         SECTION: NON-METALLIC CHARACTER
+    ═══════════════════════════════════ -->
+    <div class="section" id="nonmetallic">
+      <div class="section-header">
+        <div class="section-eyebrow">Periodic Property 3</div>
+        <h2 class="section-title">Non-metallic Character</h2>
+        <p class="section-sub">Elements with a tendency to gain electrons in order to attain octet in their outermost orbit are considered as non-metals.</p>
+      </div>
+
+      <div class="def-box">
+        <div class="def-label">Definition</div>
+        <div class="def-text">Those elements, which have a tendency to gain electrons, in order to attain octet in their outermost orbit, are considered as <em>non-metals</em>. Non-metals are <strong>oxidising agents</strong>. Non-metals usually have 5, 6 or 7 electrons in their outermost orbits.</div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Non-metallic Character Depends On</div>
+        <div class="two-col">
+          <div>
+            <div class="sub-title">Atomic Size</div>
+            <p>The smaller the atomic size, the greater is the nuclear pull and the tendency to gain electrons → <strong>more non-metallic</strong> by nature.</p>
+          </div>
+          <div>
+            <div class="sub-title">Nuclear Charge</div>
+            <p>The greater the nuclear charge, the greater is the tendency to gain electron(s) → <strong>more non-metallic</strong> is the element.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Trends in Non-metallic Character</div>
+        <div class="two-col">
+          <div>
+            <div class="sub-title">↓ Down a Group — Non-metallic Character DECREASES</div>
+            <div class="trend-box"><span class="trend-label">Non-metallic Character — Down Group</span><span class="trend-down">↓ Decreases</span></div>
+            <p><strong>Reason:</strong> The atomic size increases due to addition of new shells over successive periods. Though nuclear charge increases, the effect of increasing atomic size is greater. Therefore non-metallic nature decreases down the group.</p>
+            <div class="hl hl-red">
+              Group 14 example:<br>
+              C → Non-metal<br>
+              Si → Metalloid<br>
+              Ge → Metalloid<br>
+              Sn → Metal<br>
+              Pb → Metal
+            </div>
+          </div>
+          <div>
+            <div class="sub-title">→ Across a Period — Non-metallic Character INCREASES</div>
+            <div class="trend-box"><span class="trend-label">Non-metallic Character — Across Period</span><span class="trend-up">↑ Increases</span></div>
+            <p><strong>Reason:</strong> On moving across a period, tendency to gain electron(s) increases due to increase in nuclear pull and decrease in atomic size. Therefore non-metallic character increases across a period from left to right.</p>
+            <div class="hl hl-green">
+              3rd Period:<br>
+              Na &lt; Mg &lt; Al &lt; Si &lt; P &lt; S &lt; Cl<br>
+              (Non-metallic character increases →)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Nature of Oxides — Periodicity</div>
+        <p>The nature of oxides also shows periodicity.</p>
+        <div class="hl hl-blue"><strong>Across a period:</strong> The oxides of elements in a particular period show decreasing basic nature and finally become acidic.</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Oxide</th><th>Na₂O</th><th>MgO</th><th>Al₂O₃</th><th>SiO₂</th><th>P₂O₅</th><th>SO₃</th><th>Cl₂O₇</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Nature</strong></td>
+                <td><span class="badge badge-green">Strongly Basic</span></td>
+                <td><span class="badge badge-green">Basic</span></td>
+                <td><span class="badge badge-teal">Amphoteric</span></td>
+                <td><span class="badge badge-gold">Feebly Acidic</span></td>
+                <td><span class="badge badge-red">Acidic</span></td>
+                <td><span class="badge badge-red">More Acidic</span></td>
+                <td><span class="badge badge-red">Most Acidic</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="hl hl-green"><strong>Down a group:</strong> The basic nature of oxides of metals increases.</div>
+
+        <div class="sub-title">Chemical Reactivity Trends</div>
+        <div class="two-col">
+          <div>
+            <p><strong>Across a period:</strong> Reactivity first decreases (metals losing electrons becomes harder as you move right) then increases (non-metals gaining electrons becomes easier). Silicon is the least reactive element in the 3rd period.</p>
+          </div>
+          <div>
+            <p><strong>Down a group:</strong> For metals, reactivity increases (losing electrons becomes easier). For non-metals, reactivity decreases (gaining electrons becomes harder). Most reactive metal: Cs. Most reactive non-metal: F (Fluorine, top of Group 17).</p>
+          </div>
+        </div>
+
+        <div class="sub-title">Melting &amp; Boiling Points of Non-metals — Increase Down Group</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Non-Metal</th><th>M.P. (°C)</th><th>B.P. (°C)</th><th>Physical State</th></tr></thead>
+            <tbody>
+              <tr><td>Fluorine (F)</td><td>–219.6</td><td>–187</td><td><span class="badge badge-blue">Gas</span></td></tr>
+              <tr><td>Chlorine (Cl)</td><td>–101</td><td>–34.6</td><td><span class="badge badge-blue">Gas</span></td></tr>
+              <tr><td>Bromine (Br)</td><td>–7.2</td><td>+58.8</td><td><span class="badge badge-teal">Liquid</span></td></tr>
+              <tr><td>Iodine (I)</td><td>+113.6</td><td>+183</td><td><span class="badge badge-purple">Solid</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         SECTION: IONISATION ENERGY
+    ═══════════════════════════════════ -->
+    <div class="section" id="ionisation">
+      <div class="section-header">
+        <div class="section-eyebrow">Periodic Property 4</div>
+        <h2 class="section-title">Ionisation Potential / Ionisation Energy (I.E.)</h2>
+        <p class="section-sub">The energy required to remove an electron from a neutral isolated gaseous atom.</p>
+      </div>
+
+      <div class="def-box">
+        <div class="def-label">Definition</div>
+        <div class="def-text">The energy required to remove an electron from a neutral isolated gaseous atom and convert it into a positively charged gaseous ion is called <em>ionisation potential (I.P.)</em> or <em>ionisation energy (I.E.)</em> or <em>first ionisation energy (IE₁)</em>.</div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Formula &amp; Unit</div>
+        <div class="formula-block">M(g) + I.E. → M⁺(g) + e⁻   [M can be any element]</div>
+        <div class="hl hl-blue">
+          <strong>Unit:</strong> I.E. is measured in <em>electron volts per atom (eV/atom)</em> and its S.I. unit is <em>kilojoule per mole (kJ mol⁻¹)</em>.<br>
+          <strong>Note:</strong> Metals usually have low I.E. whereas non-metals have high I.E.
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">I.E. Depends On</div>
+        <div class="two-col">
+          <div>
+            <div class="sub-title">Atomic Size</div>
+            <p>The greater the atomic size, the lesser the force of attraction between the nucleus and outermost electrons. Electrons of the outermost shell lie further away → removal easier → <strong>ionisation energy required is less</strong>.</p>
+          </div>
+          <div>
+            <div class="sub-title">Nuclear Charge</div>
+            <p>The greater the nuclear charge, greater is the attraction for the electrons of the outermost shell. The electrons are more firmly held → greater energy required → <strong>higher I.E.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Trends in Ionisation Energy</div>
+        <div class="two-col">
+          <div>
+            <div class="sub-title">→ Across a Period — I.E. INCREASES (with exceptions)</div>
+            <div class="trend-box"><span class="trend-label">Ionisation Energy — Across Period</span><span class="trend-up">↑ Increases</span></div>
+            <p><strong>Reason:</strong> Atomic size decreases due to an increase in nuclear charge → more energy required to remove electrons.</p>
+            <div class="table-wrap" style="margin-top:0.8rem">
+              <table>
+                <thead><tr><th colspan="8">2nd Period — I.E. (kJ mol⁻¹)</th></tr>
+                <tr><th>Li</th><th>Be*</th><th>B</th><th>C</th><th>N*</th><th>O</th><th>F</th><th>Ne</th></tr></thead>
+                <tbody><tr><td>520</td><td>899</td><td>801</td><td>1088</td><td>1402</td><td>1314</td><td>1681</td><td>2080</td></tr></tbody>
+              </table>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th colspan="8">3rd Period — I.E. (kJ mol⁻¹)</th></tr>
+                <tr><th>Na</th><th>Mg*</th><th>Al</th><th>Si</th><th>P*</th><th>S</th><th>Cl</th><th>Ar</th></tr></thead>
+                <tbody><tr><td>496</td><td>737</td><td>577</td><td>786</td><td>1011</td><td>999</td><td>1256</td><td>1520</td></tr></tbody>
+              </table>
+            </div>
+            <p style="font-size:0.78rem; color:var(--text-3)">* Exceptions: Be, Mg, N, P have higher I.E. than expected neighbours.</p>
+          </div>
+          <div>
+            <div class="sub-title">↓ Down a Group — I.E. DECREASES</div>
+            <div class="trend-box"><span class="trend-label">Ionisation Energy — Down Group</span><span class="trend-down">↓ Decreases</span></div>
+            <p><strong>Reason:</strong> Increase in atomic size overcomes the effect of increase in nuclear charge → electrons farther away → less energy needed.</p>
+            <div class="table-wrap" style="margin-top:0.8rem">
+              <table>
+                <thead><tr><th colspan="2">Group 1 — I.E. (kJ mol⁻¹)</th></tr>
+                <tr><th>Element</th><th>I.E.</th></tr></thead>
+                <tbody>
+                  <tr><td>H</td><td>1312</td></tr>
+                  <tr><td>Li</td><td>520</td></tr>
+                  <tr><td>Na</td><td>498</td></tr>
+                  <tr><td>K</td><td>419</td></tr>
+                  <tr><td>Rb</td><td>403</td></tr>
+                  <tr><td>Cs</td><td>375</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-wrap" style="margin-top:0.6rem">
+              <table>
+                <thead><tr><th colspan="2">Group 17 — I.E. (kJ mol⁻¹)</th></tr>
+                <tr><th>Element</th><th>I.E.</th></tr></thead>
+                <tbody>
+                  <tr><td>F</td><td>1681</td></tr>
+                  <tr><td>Cl</td><td>1256</td></tr>
+                  <tr><td>Br</td><td>1143</td></tr>
+                  <tr><td>I</td><td>1008</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="hl hl-gold">
+          <strong>Highest I.E.:</strong> Helium (He) = 2372.0 kJ mol⁻¹<br>
+          <strong>Lowest I.E.:</strong> Caesium (Cs) = 375.0 kJ mol⁻¹ (Fr is radioactive, so not determined correctly)
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         SECTION: ELECTRON AFFINITY
+    ═══════════════════════════════════ -->
+    <div class="section" id="ea">
+      <div class="section-header">
+        <div class="section-eyebrow">Periodic Property 5</div>
+        <h2 class="section-title">Electron Affinity (E.A.) / Electron Gain Enthalpy</h2>
+        <p class="section-sub">Energy released when an extra electron is added to a neutral isolated gaseous atom.</p>
+      </div>
+
+      <div class="def-box">
+        <div class="def-label">Definition</div>
+        <div class="def-text">The amount of energy released while converting a neutral gaseous isolated atom into a negatively charged gaseous ion (anion) by the addition of an electron is called <em>Electron Affinity (E.A.)</em>.</div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Formula &amp; Unit</div>
+        <div class="formula-block">X(g) + e⁻ → X⁻(g) + E.A.   [X is any element in gaseous state]</div>
+        <p>Example: &nbsp;<span class="formula">Cl(g) + e⁻ → Cl⁻(g) + 349 kJ/mol</span></p>
+        <p style="margin-top:0.5rem">Therefore, electron affinity of chlorine is <strong>–349 kJ/mol</strong>.</p>
+        <div class="hl hl-blue">
+          <strong>Unit:</strong> electron volts per atom (eV/atom) or kJ mol⁻¹.<br>
+          <strong>Sign:</strong> Electron affinity is represented by a <em>negative sign [–]</em> e.g., E.A. of Cl = –349 kJ/mol.
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">E.A. Depends On</div>
+        <div class="two-col">
+          <div>
+            <div class="sub-title">Atomic Size</div>
+            <p>The smaller the atomic size, the greater the electron affinity, because the effective attractive force between the nucleus and the valence electrons is greater in smaller atoms → electrons held firmly → greater tendency to attract incoming electron.</p>
+          </div>
+          <div>
+            <div class="sub-title">Nuclear Charge</div>
+            <p>The greater the nuclear charge, greater is the electron affinity, because increase in nuclear charge increases the effective attractive force on the valence electrons.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Trends in Electron Affinity</div>
+        <div class="two-col">
+          <div>
+            <div class="sub-title">→ Across a Period — E.A. INCREASES</div>
+            <div class="trend-box"><span class="trend-label">Electron Affinity — Across Period</span><span class="trend-up">↑ Increases</span></div>
+            <p>Atomic size decreases and nuclear charge increases → highest E.A. for Group 17 (halogens), lowest for Group 1 (alkali metals).</p>
+          </div>
+          <div>
+            <div class="sub-title">↓ Down a Group — E.A. DECREASES</div>
+            <div class="trend-box"><span class="trend-label">Electron Affinity — Down Group</span><span class="trend-down">↓ Decreases</span></div>
+            <p>Atomic size increases more than nuclear charge → net decrease in effective attraction → E.A. decreases.</p>
+          </div>
+        </div>
+
+        <div class="sub-title">Electron Affinity Values (kJ mol⁻¹)</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Period</th><th>H</th><th>Li</th><th>Be*</th><th>B</th><th>C</th><th>N*</th><th>O</th><th>F</th><th>Ne*</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>E.A.</strong></td>
+                <td>–72.8</td><td>–59.8</td><td>+ve</td><td>–88.0</td><td>–122</td><td>+ve</td><td>–140.9</td><td>–327.9</td><td>+ve</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Period 3</th><th>Na</th><th>Mg*</th><th>Al</th><th>Si</th><th>P*</th><th>S</th><th>Cl</th><th>Ar*</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>E.A.</strong></td>
+                <td>–53.1</td><td>+ve</td><td>–50.0</td><td>–119</td><td>–74</td><td>–200</td><td>–349</td><td>+ve</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:0.78rem; color:var(--text-3)">* Groups 2 and 15 do not show negative E.A. values — they are exceptions. Inert gases have zero electron affinity.</p>
+
+        <div class="hl hl-red">
+          <strong>Important Exceptions:</strong><br>
+          • In Group 17: <strong>Fluorine has lower E.A. than Chlorine</strong><br>
+          • In Group 16: <strong>Oxygen has lower E.A. than Sulphur</strong><br>
+          <strong>Reason:</strong> The size of Fluorine and Oxygen atoms is very small. As a result, there are strong inter-electronic repulsions and thus the incoming electron does not feel much attraction. Therefore their E.A. values are lower than expected.
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         SECTION: ELECTRONEGATIVITY
+    ═══════════════════════════════════ -->
+    <div class="section" id="en">
+      <div class="section-header">
+        <div class="section-eyebrow">Periodic Property 6</div>
+        <h2 class="section-title">Electronegativity (E.N.)</h2>
+        <p class="section-sub">The tendency of an atom in a molecule to attract the shared pair of electrons towards itself.</p>
+      </div>
+
+      <div class="def-box">
+        <div class="def-label">Definition</div>
+        <div class="def-text">The tendency of an atom in a molecule to attract the shared pair of electrons towards itself is called its <em>electronegativity</em>.</div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Key Facts About Electronegativity</div>
+        <div class="two-col">
+          <div class="card" style="--card-top:var(--blue)">
+            <div class="card-title">Dimensionless Property</div>
+            <div class="card-body">Electronegativity is a dimensionless property — it only indicates a tendency. It shows the net result of the tendencies of different elements to attract the bond-forming electron pair.</div>
+          </div>
+          <div class="card" style="--card-top:var(--gold)">
+            <div class="card-title">Pauling Scale (1932)</div>
+            <div class="card-body">Devised by Linus Pauling. Highest value: Fluorine = <strong>4.0</strong>. Lowest value: Caesium = <strong>0.7</strong>. Most widely used scale of electronegativity.</div>
+          </div>
+        </div>
+        <div class="hl hl-gold">
+          <strong>General Rule:</strong> Metals show lower electronegativity as compared to non-metals. Thus <em>metals are electropositive</em> and <em>non-metals are electronegative</em>.
+        </div>
+        <div class="hl hl-purple">
+          <strong>Diagonal Relationship:</strong> The elements of the second period show resemblance in properties with the elements of the next group of the third period, due to very similar electronegativity difference. This leads to a diagonal relationship: Li &amp; Mg, Be &amp; Al, B &amp; Si. These elements are called <em>bridge elements</em>.
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">E.N. Depends On</div>
+        <div class="two-col">
+          <div>
+            <div class="sub-title">Atomic Size</div>
+            <p>The greater the size of the atom, the lesser the electronegativity, since the electrons being farther away from the nucleus experience a lesser force of attraction.</p>
+          </div>
+          <div>
+            <div class="sub-title">Nuclear Charge</div>
+            <p>The greater the nuclear charge, the greater the electronegativity, because increase in nuclear charge causes electron attraction with a greater force.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Trends in Electronegativity</div>
+        <div class="two-col">
+          <div>
+            <div class="sub-title">→ Across a Period — E.N. INCREASES</div>
+            <div class="trend-box"><span class="trend-label">Electronegativity — Across Period</span><span class="trend-up">↑ Increases</span></div>
+            <p>Nuclear charge increases due to increase in atomic number → electronegativity increases from left to right in a period. In 2nd period: Li (1.0) → Be (1.5) → … → F (4.0).</p>
+          </div>
+          <div>
+            <div class="sub-title">↓ Down a Group — E.N. DECREASES</div>
+            <div class="trend-box"><span class="trend-label">Electronegativity — Down Group</span><span class="trend-down">↓ Decreases</span></div>
+            <p>Atomic number increases, but due to addition of extra shells, atomic size increases. The effect of increasing atomic size overcomes the effect of increasing nuclear charge → E.N. decreases. Group 1: Li (1.0) → … → Fr (0.7).</p>
+          </div>
+        </div>
+        <div class="hl hl-teal">
+          <strong>Note:</strong> Greater the value of electron affinity, the easier it is to gain electrons and more non-metallic or more electronegative or more oxidising is the element.
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Electronegativity Values — Pauling Scale</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Period ↓ / Group →</th><th>1</th><th>2</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Period 2</strong></td><td>Li 1.0</td><td>Be 1.5</td><td>B 2.0</td><td>C 2.5</td><td>N 3.0</td><td>O 3.5</td><td>F 4.0</td></tr>
+              <tr><td><strong>Period 3</strong></td><td>Na 0.9</td><td>Mg 1.2</td><td>Al 1.5</td><td>Si 1.8</td><td>P 2.1</td><td>S 2.5</td><td>Cl 3.0</td></tr>
+              <tr><td><strong>Period 4</strong></td><td>K 0.8</td><td>Ca 1.0</td><td>Ga 1.6</td><td>Ge 1.8</td><td>As 2.0</td><td>Se 2.4</td><td>Br 2.8</td></tr>
+              <tr><td><strong>Period 5</strong></td><td>Rb 0.8</td><td>Sr 1.0</td><td>In 1.7</td><td>Sn 1.8</td><td>Sb 1.9</td><td>Te 2.1</td><td>I 2.5</td></tr>
+              <tr><td><strong>Period 6</strong></td><td>Cs 0.7</td><td>Ba 0.9</td><td>Tl 1.8</td><td>Pb 1.9</td><td>Bi 1.9</td><td>Po 2.0</td><td>At 2.2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         SECTION: ATOMIC & MASS NUMBER
+    ═══════════════════════════════════ -->
+    <div class="section" id="massnumber">
+      <div class="section-header">
+        <div class="section-eyebrow">Special Topic</div>
+        <h2 class="section-title">Atomic Number &amp; Mass Number</h2>
+        <p class="section-sub">Relation between atomic number and mass number for light elements.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="def-box">
+          <div class="def-label">Atomic Number (Z)</div>
+          <div class="def-text">The atomic number of an element is equal to the number of protons in the nucleus. <strong>Atomic number is the unique property of an element</strong>, because no two elements have the same atomic number.</div>
+        </div>
+        <div class="def-box" style="border-color:rgba(91,156,246,0.25)">
+          <div class="def-label">Mass Number (A)</div>
+          <div class="def-text">The mass number of an element is the sum of the number of protons and neutrons in the nucleus of the atom of that element.</div>
+        </div>
+      </div>
+
+      <div class="formula-block">Mass Number (A) = No. of Protons (p) + No. of Neutrons (n)</div>
+
+      <div class="block">
+        <div class="block-title">Significance of Atomic Number (Z)</div>
+        <div class="three-col">
+          <div class="card" style="--card-top:var(--green)">
+            <div class="card-title">Unique Identity</div>
+            <div class="card-body">No two elements have the same atomic number. It distinguishes each element from all others.</div>
+          </div>
+          <div class="card" style="--card-top:var(--blue)">
+            <div class="card-title">Electronic Configuration</div>
+            <div class="card-body">Gives the electronic configuration. e.g., Z = 13 → config. 2, 8, 3 (Group 13, Period 3).</div>
+          </div>
+          <div class="card" style="--card-top:var(--purple)">
+            <div class="card-title">Position in Table</div>
+            <div class="card-body">Helps find the element's group and period in the periodic table. Z = 17 → Period 3, Group 17.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Pattern in Light Elements</div>
+        <div class="hl hl-gold">For light elements with an <strong>even</strong> number of protons (e.g., ⁴₂He, ¹²₆C, etc.), their mass numbers are <strong>twice the atomic numbers</strong>, except ⁹₄Be and ⁴⁰₁₈Ar.</div>
+        <div class="hl hl-blue">For light elements with an <strong>odd</strong> number of protons (e.g., ⁷₃Li, ¹¹₅B, ¹⁹₉F, ²³₁₁Na), their mass numbers are <strong>twice the atomic numbers + 1</strong> (A = 2Z + 1), except ¹⁴₇N and ¹₁H.</div>
+        <div class="hl hl-green">Elements with n/p (neutron/proton) ratio around <strong>1 are stable</strong>, e.g., light metals like sodium, potassium, calcium. Elements with n/p ratio <strong>1.5 and above are radioactive</strong>, e.g., heavy metals like uranium — they emit radiations and are unstable.</div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Table 1.4 — First 20 Elements: Electrons, Protons, Neutrons</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Element</th><th>Symbol</th><th>Atomic No. (Z) = Protons</th><th>Mass No. (A)</th><th>Neutrons (A–Z)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Hydrogen</td><td>H</td><td>1</td><td>1</td><td>0</td></tr>
+              <tr><td>Helium</td><td>He</td><td>2</td><td>4</td><td>2</td></tr>
+              <tr><td>Lithium</td><td>Li</td><td>3</td><td>7</td><td>4</td></tr>
+              <tr><td>Beryllium</td><td>Be</td><td>4</td><td>9</td><td>5</td></tr>
+              <tr><td>Boron</td><td>B</td><td>5</td><td>11</td><td>6</td></tr>
+              <tr><td>Carbon</td><td>C</td><td>6</td><td>12</td><td>6</td></tr>
+              <tr><td>Nitrogen</td><td>N</td><td>7</td><td>14</td><td>7</td></tr>
+              <tr><td>Oxygen</td><td>O</td><td>8</td><td>16</td><td>8</td></tr>
+              <tr><td>Fluorine</td><td>F</td><td>9</td><td>19</td><td>10</td></tr>
+              <tr><td>Neon</td><td>Ne</td><td>10</td><td>20</td><td>10</td></tr>
+              <tr><td>Sodium</td><td>Na</td><td>11</td><td>23</td><td>12</td></tr>
+              <tr><td>Magnesium</td><td>Mg</td><td>12</td><td>24</td><td>12</td></tr>
+              <tr><td>Aluminium</td><td>Al</td><td>13</td><td>27</td><td>14</td></tr>
+              <tr><td>Silicon</td><td>Si</td><td>14</td><td>28</td><td>14</td></tr>
+              <tr><td>Phosphorus</td><td>P</td><td>15</td><td>31</td><td>16</td></tr>
+              <tr><td>Sulphur</td><td>S</td><td>16</td><td>32</td><td>16</td></tr>
+              <tr><td>Chlorine</td><td>Cl</td><td>17</td><td>35, 37</td><td>18, 20</td></tr>
+              <tr><td>Argon</td><td>Ar</td><td>18</td><td>40</td><td>22</td></tr>
+              <tr><td>Potassium</td><td>K</td><td>19</td><td>39</td><td>20</td></tr>
+              <tr><td>Calcium</td><td>Ca</td><td>20</td><td>40</td><td>20</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         SECTION: COMPARISON
+    ═══════════════════════════════════ -->
+    <div class="section" id="comparison">
+      <div class="section-header">
+        <div class="section-eyebrow">Special Topic</div>
+        <h2 class="section-title">Alkali Metals vs Halogens</h2>
+        <p class="section-sub">A detailed comparison of Group 1 (Alkali Metals) and Group 17 (Halogens).</p>
+      </div>
+
+      <div class="block">
+        <div class="table-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th style="min-width:140px">Property</th>
+                <th style="min-width:200px">Alkali Metals [Group 1]</th>
+                <th style="min-width:200px">Halogens [Group 17]</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Elements</strong></td><td>Li, Na, K, Rb, Cs, Fr</td><td>F, Cl, Br, I, At</td></tr>
+              <tr><td><strong>Occurrence</strong></td><td>Combined state (reactive)</td><td>Combined state as salts</td></tr>
+              <tr><td><strong>Physical State</strong></td><td>Shining white solid metals; soft; Li is hardest; can be cut with a knife; become dull as they react with air</td><td>Non-metals; diatomic in gaseous state; F (very reactive, poisonous yellow gas), Cl (poisonous yellow-green gas), Br (poisonous red-brown volatile liquid), I (dark grey crystalline solid)</td></tr>
+              <tr><td><strong>Valence Electrons</strong></td><td>Possess ONE valence electron; show similar properties</td><td>Possess SEVEN valence electrons; show similar properties</td></tr>
+              <tr><td><strong>Conduction</strong></td><td>Good conductors of electricity</td><td>Non-conductors of electricity</td></tr>
+              <tr><td><strong>Nature</strong></td><td>Highly reactive, electropositive metals</td><td>Highly reactive, electronegative non-metals</td></tr>
+              <tr><td><strong>Metallic Character</strong></td><td>Increases from Li to Fr</td><td>Decreases from F to I (non-metallic character decreases)</td></tr>
+              <tr><td><strong>M.P. &amp; B.P.</strong></td><td>Decreases down the group</td><td>Increases down the group</td></tr>
+              <tr><td><strong>Atomic Size</strong></td><td>Have the largest atomic size in their period (except inert gases); increases down the group</td><td>Have the smallest atomic size in their period; increases down the group</td></tr>
+              <tr><td><strong>Ionisation Energy</strong></td><td>Lowest I.E. in their period; decreases down the group</td><td>High I.E. (lower than noble gases) in their period; decreases down the group</td></tr>
+              <tr><td><strong>Electron Affinity</strong></td><td>Low E.A. values; further decrease down the group</td><td>High E.A. values; they too decrease down the group</td></tr>
+              <tr><td><strong>Electronegativity</strong></td><td>Lowest E.N. in their period; decreases down the group</td><td>Highest E.N. in their period; decreases down the group</td></tr>
+              <tr><td><strong>Reactivity</strong></td><td>Reactive metals; reactivity further increases down the group</td><td>Reactive non-metals; reactivity decreases down the group</td></tr>
+              <tr><td><strong>Reaction with Water &amp; Acids</strong></td><td>React vigorously with water and acids liberating hydrogen; reactivity increases down the group</td><td>Generally do not react with dilute acids and water</td></tr>
+              <tr><td><strong>Reducing/Oxidising Agent</strong></td><td>Strong <em>reducing agents</em> as they lose electrons to complete their octet</td><td>Strong <em>oxidising agents</em> as they accept electrons to complete their octet</td></tr>
+              <tr><td><strong>Compound Formation</strong></td><td>Form <strong>electrovalent</strong> compounds with non-metals. Example: NaCl, KBr</td><td>Form <strong>electrovalent</strong> compounds with metals (e.g., KCl, CaCl₂). Form <strong>covalent</strong> compounds with hydrogen and other non-metals (e.g., HBr, HCl, HI, CCl₄)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         SECTION: SUMMARY TABLE
+    ═══════════════════════════════════ -->
+    <div class="section" id="summary">
+      <div class="section-header">
+        <div class="section-eyebrow">Quick Revision</div>
+        <h2 class="section-title">Summary — Variations in Periodic Properties</h2>
+        <p class="section-sub">Complete reference table for all property trends across the periodic table.</p>
+      </div>
+
+      <div class="block">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="min-width:180px">Property</th>
+                <th>Across the Period (Left → Right)</th>
+                <th>Down the Group (Top → Bottom)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>No. of Valence Electrons</strong></td><td class="up-cell">↑ Increases</td><td class="same-cell">= Remains Same</td></tr>
+              <tr><td><strong>Atomic Size (Radius)</strong></td><td class="down-cell">↓ Decreases</td><td class="up-cell">↑ Increases</td></tr>
+              <tr><td><strong>Ionisation Energy</strong></td><td class="up-cell">↑ Increases (with exceptions)</td><td class="down-cell">↓ Decreases</td></tr>
+              <tr><td><strong>Metallic Character</strong></td><td class="down-cell">↓ Decreases</td><td class="up-cell">↑ Increases</td></tr>
+              <tr><td><strong>Non-metallic Character</strong></td><td class="up-cell">↑ Increases</td><td class="down-cell">↓ Decreases</td></tr>
+              <tr><td><strong>Electron Affinity</strong></td><td class="up-cell">↑ Increases</td><td class="down-cell">↓ Decreases</td></tr>
+              <tr><td><strong>Electronegativity</strong></td><td class="up-cell">↑ Increases</td><td class="down-cell">↓ Decreases</td></tr>
+              <tr><td><strong>Basic Nature of Oxides</strong></td><td class="down-cell">↓ Decreases</td><td class="up-cell">↑ Increases</td></tr>
+              <tr><td><strong>Oxidising Nature</strong></td><td class="up-cell">↑ Increases</td><td class="down-cell">↓ Decreases</td></tr>
+              <tr><td><strong>Reducing Nature</strong></td><td class="down-cell">↓ Decreases</td><td class="up-cell">↑ Increases</td></tr>
+              <tr><td><strong>Melting Point</strong></td><td class="mixed-cell">↑ Grp I→IV, then ↓ Grp IV→VII</td><td class="mixed-cell">Metals ↓; Non-metals Grp V–VII ↑</td></tr>
+              <tr><td><strong>Boiling Point</strong></td><td class="mixed-cell">↑ Grp I→IV, then ↓ Grp IV→VII</td><td class="mixed-cell">Metals ↓; Non-metals Grp V–VII ↑</td></tr>
+              <tr><td><strong>Density</strong></td><td class="mixed-cell">↑ then slight ↓ (max at Grp 14)</td><td class="up-cell">↑ Generally Increases</td></tr>
+              <tr><td><strong>Atomic Number (Z)</strong></td><td class="up-cell">↑ Increases by 1 each step</td><td class="up-cell">↑ Increases (larger jumps)</td></tr>
+              <tr><td><strong>Number of Shells</strong></td><td class="same-cell">= Remains Same</td><td class="up-cell">↑ Increases by 1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Quick Memory Aid — At a Glance</div>
+        <div class="two-col">
+          <div>
+            <div class="sub-title">Moving LEFT → RIGHT across a period</div>
+            <div class="hl hl-blue">
+              ↑ Increases: Valence electrons, Ionisation energy, Non-metallic character, Electron affinity, Electronegativity, Oxidising nature, Atomic No.<br><br>
+              ↓ Decreases: Atomic size, Metallic character, Reducing nature, Basic nature of oxides
+            </div>
+          </div>
+          <div>
+            <div class="sub-title">Moving TOP → BOTTOM down a group</div>
+            <div class="hl hl-gold">
+              ↑ Increases: Atomic size, Metallic character, Reducing nature, Basic nature of oxides, Density, Atomic No.<br><br>
+              ↓ Decreases: Ionisation energy, Non-metallic character, Electron affinity, Electronegativity, Oxidising nature<br><br>
+              = Remains Same: Valence electrons, Valency, Number of valence electrons
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         SECTION: QUIZ
+    ═══════════════════════════════════ -->
+    <div class="section" id="quiz">
+      <div class="section-header">
+        <div class="section-eyebrow">Practice</div>
+        <h2 class="section-title">Practice Quiz</h2>
+        <p class="section-sub">Test your understanding! Click an option to see if you're correct.</p>
+      </div>
+
+      <!-- Q1 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q1. Who stated the Modern Periodic Law — "Properties of elements are periodic functions of their atomic number"?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q1',this,false,'Mendeleev based his periodic table on atomic mass, not atomic number.')">Dmitri Mendeleev</button>
+          <button class="quiz-opt" onclick="checkQ('q1',this,true,'✅ Correct! Henry Moseley stated: Physical and chemical properties of elements are periodic functions of their atomic number.')">Henry Moseley</button>
+          <button class="quiz-opt" onclick="checkQ('q1',this,false,'Döbereiner proposed triads of elements — three elements grouped together by atomic mass.')">Döbereiner</button>
+          <button class="quiz-opt" onclick="checkQ('q1',this,false,'Niel Bohr gave the extended long form of the modern periodic table, but not this law.')">Niel Bohr</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q1"></div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q2. Across a period from left to right, which property DECREASES?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q2',this,false,'Ionisation energy increases across a period because atomic size decreases and nuclear charge increases.')">Ionisation Energy</button>
+          <button class="quiz-opt" onclick="checkQ('q2',this,true,'✅ Correct! Atomic size decreases across a period because nuclear charge (atomic number) increases from left to right, pulling the outermost shell closer to the nucleus.')">Atomic Size</button>
+          <button class="quiz-opt" onclick="checkQ('q2',this,false,'Electronegativity increases across a period because nuclear charge increases.')">Electronegativity</button>
+          <button class="quiz-opt" onclick="checkQ('q2',this,false,'Non-metallic character increases across a period — more tendency to gain electrons.')">Non-metallic Character</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q2"></div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q3. Which element has the highest electronegativity value on the Pauling scale?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q3',this,false,'Chlorine has E.N. = 3.0, which is high but not the highest.')">Chlorine (Cl)</button>
+          <button class="quiz-opt" onclick="checkQ('q3',this,false,'Oxygen has E.N. = 3.5, second highest — but not the highest.')">Oxygen (O)</button>
+          <button class="quiz-opt" onclick="checkQ('q3',this,true,'✅ Correct! Fluorine has the highest electronegativity of 4.0 on the Pauling scale. It is the most electronegative element.')">Fluorine (F)</button>
+          <button class="quiz-opt" onclick="checkQ('q3',this,false,'Nitrogen has E.N. = 3.0 on the Pauling scale.')">Nitrogen (N)</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q3"></div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q4. An element has electronic configuration 2, 8, 1. What is its group and period?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q4',this,false,'3 shells → Period 3 (not Period 2). Count the number of shells for the period.')">Period 2, Group 1</button>
+          <button class="quiz-opt" onclick="checkQ('q4',this,true,'✅ Correct! 3 shells (K, L, M) → Period 3. 1 valence electron (outermost shell) → Group 1. This is Sodium (Na), atomic number 11.')">Period 3, Group 1</button>
+          <button class="quiz-opt" onclick="checkQ('q4',this,false,'The group is determined by valence electrons (= 1), not total electrons (= 11). Group is 1.')">Period 3, Group 11</button>
+          <button class="quiz-opt" onclick="checkQ('q4',this,false,'3 shells → Period 3, not Period 2. Period = number of shells.')">Period 2, Group 11</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q4"></div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q5. Cation is _______ than the parent atom in size.</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q5',this,true,'✅ Correct! A cation is formed by LOSING electrons. Protons > electrons → nucleus attracts remaining electrons inward more strongly → size decreases. Na (2,8,1) → Na⁺ (2,8).')">Smaller</button>
+          <button class="quiz-opt" onclick="checkQ('q5',this,false,'Anion (not cation) is larger than the parent atom. Anion GAINS electrons → more electrons than protons → size expands.')">Larger</button>
+          <button class="quiz-opt" onclick="checkQ('q5',this,false,'Cation is NOT the same size as parent atom. Losing electrons always results in a smaller ion.')">Same size</button>
+          <button class="quiz-opt" onclick="checkQ('q5',this,false,'Cations are ALWAYS smaller than parent atoms regardless of the element. This is a universal rule.')">Depends on element</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q5"></div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q6. Which group is known as "Halogens" and what does the name mean?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q6',this,false,'Group 16 elements are Chalcogens, meaning ore-forming elements (O, S, Se, Te, Po).')">Group 16 — Ore forming (Chalcogens)</button>
+          <button class="quiz-opt" onclick="checkQ('q6',this,true,'✅ Correct! Group 17 elements are Halogens. The word Halogen means salt former. Members: F, Cl, Br, I, At. They form salts like NaCl when reacting with metals.')">Group 17 — Salt formers</button>
+          <button class="quiz-opt" onclick="checkQ('q6',this,false,'Group 1 elements are Alkali Metals — they form alkalis when reacting with water (Li, Na, K, Rb, Cs, Fr).')">Group 1 — Alkali Metals</button>
+          <button class="quiz-opt" onclick="checkQ('q6',this,false,'Group 18 elements are Noble Gases (Zero Group) — He, Ne, Ar, Kr, Xe, Rn. They are inert.')">Group 18 — Noble Gases</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q6"></div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q7. Sulphur has 6 electrons in its outermost shell. What is its valency?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q7',this,false,'Valency ≠ 6. When outer electrons = 5, 6, or 7, valency = 8 − outer electrons = 8 − 6 = 2.')">6</button>
+          <button class="quiz-opt" onclick="checkQ('q7',this,true,'✅ Correct! Sulphur has 6 valence electrons. Since 6 > 4, valency = 8 − 6 = 2. Sulphur is in Group 16 and has valency 2.')">2</button>
+          <button class="quiz-opt" onclick="checkQ('q7',this,false,'Valency of S = 8 − 6 = 2, not 3. (3 would be for N or P which have 5 electrons: 8−5=3)')">3</button>
+          <button class="quiz-opt" onclick="checkQ('q7',this,false,'Valency = 4 only for elements with exactly 4 valence electrons (e.g., Carbon). S has 6 valence electrons → valency = 8−6 = 2.')">4</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q7"></div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q8. Which of the following is an exception to the trend of Electron Affinity across a period?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q8',this,false,'Chlorine follows the expected trend and has very high E.A. (−349 kJ/mol). It is not an exception.')">Chlorine (Cl)</button>
+          <button class="quiz-opt" onclick="checkQ('q8',this,true,'✅ Correct! Fluorine has LOWER E.A. than Chlorine, even though F is above Cl in Group 17. Reason: F is very small → strong inter-electronic repulsions → incoming electron not attracted well.')">Fluorine (F)</button>
+          <button class="quiz-opt" onclick="checkQ('q8',this,false,'Sodium follows the trend. It has relatively low E.A. (−53.1 kJ/mol) as expected for Group 1.')">Sodium (Na)</button>
+          <button class="quiz-opt" onclick="checkQ('q8',this,false,'Carbon follows the expected trend with E.A. = −122 kJ/mol.')">Carbon (C)</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q8"></div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q9. What determines the PERIOD of an element in the modern periodic table?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q9',this,false,'The number of valence electrons determines the GROUP, not the period.')">Number of valence electrons</button>
+          <button class="quiz-opt" onclick="checkQ('q9',this,false,'Atomic mass was used in Mendeleev\'s table, but in the modern table, atomic number determines the sequence.')">Atomic mass</button>
+          <button class="quiz-opt" onclick="checkQ('q9',this,true,'✅ Correct! The number of shells (electron orbits) in an atom determines its period. More shells = higher period. Na has 3 shells → Period 3. Ca has 4 shells → Period 4.')">Number of electron shells</button>
+          <button class="quiz-opt" onclick="checkQ('q9',this,false,'Nuclear charge (atomic number) determines position, but specifically the number of shells tells the period.')">Nuclear charge only</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q9"></div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q10. Which element in Group 1 has the LOWEST ionisation energy?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q10',this,false,'Lithium has I.E. = 520 kJ/mol. It is the smallest Group 1 element, so electrons are closer to the nucleus and harder to remove.')">Lithium (Li)</button>
+          <button class="quiz-opt" onclick="checkQ('q10',this,false,'Sodium has I.E. = 498 kJ/mol — lower than Li, but not the lowest in Group 1.')">Sodium (Na)</button>
+          <button class="quiz-opt" onclick="checkQ('q10',this,false,'Potassium has I.E. = 419 kJ/mol. Lower than Na, but still not the lowest.')">Potassium (K)</button>
+          <button class="quiz-opt" onclick="checkQ('q10',this,true,'✅ Correct! Caesium (Cs) has the lowest I.E. = 375 kJ/mol in Group 1. Going down the group, I.E. decreases because atomic size increases and electrons are farther from the nucleus. (Fr is radioactive so not considered.)')">Caesium (Cs)</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q10"></div>
+      </div>
+
+      <!-- Q11 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q11. Down a group, ionisation energy:</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q11',this,false,'Ionisation energy does not increase going down a group — atomic size increases, making it easier to remove electrons.')">Increases</button>
+          <button class="quiz-opt" onclick="checkQ('q11',this,true,'✅ Correct! Ionisation energy decreases down a group because atomic size increases — electrons in the outermost shell are farther from the nucleus and easier to remove.')">Decreases</button>
+          <button class="quiz-opt" onclick="checkQ('q11',this,false,'I.E. does not remain the same down a group. Each successive element has a larger atomic size.')">Remains the same</button>
+          <button class="quiz-opt" onclick="checkQ('q11',this,false,'There is a clear decreasing trend going down any group — not a mix.')">First increases then decreases</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q11"></div>
+      </div>
+
+      <!-- Q12 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q12. The "diagonal relationship" refers to resemblance between elements of the 2nd period and the next group of the 3rd period. Which pair demonstrates this?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q12',this,false,'Na and K are both in Group 1 (same group, different periods) — that is a vertical relationship, not diagonal.')">Na and K</button>
+          <button class="quiz-opt" onclick="checkQ('q12',this,false,'C and N are adjacent elements in the same period (Period 2) — not a diagonal relationship.')">C and N</button>
+          <button class="quiz-opt" onclick="checkQ('q12',this,true,'✅ Correct! Li (Period 2, Group 1) and Mg (Period 3, Group 2) is a classic diagonal relationship. Others: Be &amp; Al, B &amp; Si. They are called bridge elements.')">Li and Mg</button>
+          <button class="quiz-opt" onclick="checkQ('q12',this,false,'F and Cl are both in Group 17 — same group, different periods. This is a vertical (group) relationship.')">F and Cl</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q12"></div>
+      </div>
+
+      <!-- Q13 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q13. In which group does metallic character increase going DOWN the group AND decrease going across the period?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q13',this,false,'Group 17 elements are non-metals (Halogens). Their metallic character does not increase down the group.')">Group 17</button>
+          <button class="quiz-opt" onclick="checkQ('q13',this,false,'Group 18 are noble/inert gases — they exhibit neither metallic nor non-metallic character.')">Group 18</button>
+          <button class="quiz-opt" onclick="checkQ('q13',this,true,'✅ Correct! This is true for all metals. Group 1 (Alkali Metals) perfectly illustrates it: metallic character increases from Li → Cs (down) and decreases from left to right across any period.')">Group 1</button>
+          <button class="quiz-opt" onclick="checkQ('q13',this,false,'Group 15 (Nitrogen family) contains mostly non-metals and metalloids; it is non-metallic character that primarily applies here.')">Group 15</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q13"></div>
+      </div>
+
+      <!-- Q14 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q14. Electron Affinity is represented by a negative sign (−) because:</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q14',this,false,'It is not because the electron is negative. The sign convention is about whether energy is absorbed or released.')">The electron being added is negatively charged</button>
+          <button class="quiz-opt" onclick="checkQ('q14',this,true,'✅ Correct! Electron affinity represents energy RELEASED when an electron is added to a neutral gaseous atom. By convention, energy released is denoted by a negative sign. Example: E.A. of Cl = −349 kJ/mol.')">Energy is released during the process</button>
+          <button class="quiz-opt" onclick="checkQ('q14',this,false,'It is not because the anion is negative. The sign follows thermodynamic convention (released = negative).')">The resulting anion carries negative charge</button>
+          <button class="quiz-opt" onclick="checkQ('q14',this,false,'Electron affinity has definite measurable values, not zero. Noble gases are exceptions with zero E.A. due to stable configuration.')">It has a zero value</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q14"></div>
+      </div>
+
+      <!-- Q15 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q15. Among isoelectronic ions Mg²⁺, Na⁺, F⁻, and O²⁻ (all with 10 electrons), which has the LARGEST size?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q15',this,false,'Mg²⁺ has 12 protons and 10 electrons. Greatest nuclear pull → smallest size = 0.65 Å.')">Mg²⁺</button>
+          <button class="quiz-opt" onclick="checkQ('q15',this,false,'Na⁺ has 11 protons. More nuclear pull than F⁻ and O²⁻. Its size = 0.95 Å, not the largest.')">Na⁺</button>
+          <button class="quiz-opt" onclick="checkQ('q15',this,false,'F⁻ has 9 protons. Less pull than Na⁺ and Mg²⁺, but O²⁻ has even fewer protons (8), making O²⁻ the largest.')">F⁻</button>
+          <button class="quiz-opt" onclick="checkQ('q15',this,true,'✅ Correct! O²⁻ has only 8 protons but 10 electrons. Fewest protons = least nuclear pull = greatest size = 1.42 Å. Rule: for isoelectronic ions, more protons = smaller size.')">O²⁻</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q15"></div>
+      </div>
+
+      <!-- Q16 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q16. Across the 3rd period from Na to Cl, the nature of oxides changes from:</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q16',this,false,'The trend goes in the opposite direction — metallic nature decreases left to right, so oxides go from basic to acidic, not acidic to basic.')">Acidic → Basic</button>
+          <button class="quiz-opt" onclick="checkQ('q16',this,true,'✅ Correct! Na₂O (strongly basic) → MgO (basic) → Al₂O₃ (amphoteric) → SiO₂ (feebly acidic) → P₂O₅ (acidic) → SO₃ (more acidic) → Cl₂O₇ (most acidic). Basic nature decreases across a period.')">Basic → Acidic</button>
+          <button class="quiz-opt" onclick="checkQ('q16',this,false,'The oxides are not neutral throughout. Na₂O is strongly basic while Cl₂O₇ is most acidic.')">All neutral</button>
+          <button class="quiz-opt" onclick="checkQ('q16',this,false,'Not all are amphoteric. Only Al₂O₃ is amphoteric (can act as both acid and base).')">All amphoteric</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q16"></div>
+      </div>
+
+      <!-- Q17 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q17. Mass number (A) of an element is equal to:</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q17',this,false,'Atomic number (Z) = number of protons only. Mass number is different from atomic number.')">Number of protons only</button>
+          <button class="quiz-opt" onclick="checkQ('q17',this,false,'Number of electrons = atomic number (in a neutral atom). Mass number includes neutrons too.')">Number of electrons only</button>
+          <button class="quiz-opt" onclick="checkQ('q17',this,true,'✅ Correct! Mass number (A) = No. of protons (p) + No. of neutrons (n). For example, Carbon-12 has 6 protons + 6 neutrons = mass number 12.')">Number of protons + Number of neutrons</button>
+          <button class="quiz-opt" onclick="checkQ('q17',this,false,'Atomic mass and mass number are related but not the same. Atomic mass accounts for isotopes and is often a decimal.')">Average atomic mass</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q17"></div>
+      </div>
+
+      <!-- Q18 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q18. Halogens (Group 17) are strong _______ agents because they tend to _______ electrons.</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q18',this,false,'Reducing agents LOSE electrons. Halogens gain electrons — so they are oxidising agents, not reducing agents.')">Reducing; lose</button>
+          <button class="quiz-opt" onclick="checkQ('q18',this,true,'✅ Correct! Halogens accept (gain) electrons to complete their octet → they are strong OXIDISING agents. The more easily they gain electrons, the stronger the oxidising agent. F₂ is the strongest.')">Oxidising; gain</button>
+          <button class="quiz-opt" onclick="checkQ('q18',this,false,'Halogens do not lose electrons — they have 7 valence electrons and need only 1 more to complete the octet.')">Oxidising; lose</button>
+          <button class="quiz-opt" onclick="checkQ('q18',this,false,'Halogens do not lose electrons to be reducing agents. They gain electrons.')">Reducing; gain</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q18"></div>
+      </div>
+
+      <!-- Q19 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q19. The most reactive metal is found at the _______ of Group 1.</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q19',this,false,'Lithium at the top of Group 1 is the LEAST metallic and LEAST reactive among alkali metals.')">Top (Li)</button>
+          <button class="quiz-opt" onclick="checkQ('q19',this,false,'Sodium is in the middle of the group and moderately reactive, but not the most reactive.')">Middle (Na)</button>
+          <button class="quiz-opt" onclick="checkQ('q19',this,true,'✅ Correct! Metallic character and reactivity of metals increases going down a group. Caesium (Cs) is the most reactive alkali metal. Note: Francium (Fr) is radioactive so its properties are not well known.')">Bottom (Cs)</button>
+          <button class="quiz-opt" onclick="checkQ('q19',this,false,'Reactivity in metals depends on the ability to lose electrons. This ability INCREASES down Group 1 due to increasing atomic size.')">All have equal reactivity</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q19"></div>
+      </div>
+
+      <!-- Q20 -->
+      <div class="quiz-box">
+        <div class="quiz-q">Q20. Newland's Law of Octaves states that when elements are arranged in increasing order of atomic mass, every _____ element beginning from any element resembles the first.</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="checkQ('q20',this,false,'Not every 3rd element — Döbereiner used groups of 3 (triads), but that is a different law.')">3rd</button>
+          <button class="quiz-opt" onclick="checkQ('q20',this,false,'Not every 5th element. The analogy Newland made was to musical notes — the octave has 8 notes.')">5th</button>
+          <button class="quiz-opt" onclick="checkQ('q20',this,true,'✅ Correct! Newland\'s Law of Octaves states every 8th element resembles the 1st. Like musical notes (Do, Re, Mi, Fa, Sol, La, Ti, Do), the 8th element returns to a similar character. This law was limited to the first 56 elements.')">8th</button>
+          <button class="quiz-opt" onclick="checkQ('q20',this,false,'Not every 10th element. Newland\'s octave analogy used groups of 8.')">10th</button>
+        </div>
+        <div class="quiz-feedback" id="fb-q20"></div>
+      </div>
+
+      <!-- Score Summary -->
+      <div class="block" id="score-block" style="display:none">
+        <div class="block-title">🎯 Quiz Complete!</div>
+        <div style="text-align:center; padding:1.5rem 0">
+          <div style="font-family:var(--font-display); font-size:3.5rem; font-weight:900; color:var(--gold)" id="final-score">0/20</div>
+          <div style="font-size:0.95rem; color:var(--text-2); margin:0.6rem 0 1.4rem" id="score-msg">Keep practising!</div>
+          <button onclick="location.reload()" style="display:inline-flex;align-items:center;gap:0.5rem;background:var(--gold);color:#0c0f14;font-family:var(--font-mono);font-size:0.82rem;font-weight:500;letter-spacing:1px;padding:0.8rem 2rem;border-radius:40px;cursor:pointer;border:none;transition:all 0.2s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">↺ &nbsp;Restart Quiz</button>
+        </div>
+      </div>
+
+    </div><!-- end quiz section -->
+
+  </div><!-- end main-content -->
+</div><!-- end app -->
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer style="background:#08090d;border-top:1px solid var(--border);padding:2.2rem 2rem;text-align:center">
+  <div style="max-width:700px;margin:0 auto">
+    <div style="width:40px;height:1px;background:var(--border);margin:0.8rem auto"></div>
+    <p style="font-size:0.82rem;color:var(--text-3);margin-bottom:0.25rem">Prepared Using: <span style="color:var(--blue);font-weight:600">Claude.ai</span></p>
+    <p style="font-size:0.78rem;color:var(--text-3)">Contents &amp; Editor: <span style="color:var(--gold);font-weight:600">Jay Mody</span></p>
+  </div>
+</footer>
+
+<!-- ════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+/* ─── Section switching ─── */
+function showSection(id, navEl) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const sec = document.getElementById(id);
+  if (sec) { sec.classList.add('active'); }
+
+  document.querySelectorAll('.nav-item[data-section]').forEach(n => n.classList.remove('active'));
+  if (navEl && navEl.dataset.section) { navEl.classList.add('active'); }
+
+  document.querySelector('.main-content').scrollTo({ top: 0, behavior: 'smooth' });
+  document.querySelector('.sidebar').classList.remove('open');
+}
+
+/* ─── Sub-menu toggle ─── */
+function toggleSub(subId, navEl) {
+  const sub = document.getElementById(subId);
+  const isOpen = sub.style.display === 'block';
+
+  // Close all subs
+  document.querySelectorAll('.nav-sub').forEach(s => { s.style.display = 'none'; });
+  document.querySelectorAll('.nav-item[data-sub]').forEach(n => n.classList.remove('sub-open'));
+
+  if (!isOpen) {
+    sub.style.display = 'block';
+    if (navEl) navEl.classList.add('sub-open', 'active');
+    // Switch to that section
+    const sectionId = navEl ? navEl.dataset.sub.replace('-sub','') : null;
+    if (sectionId) showSection(sectionId, null);
+  }
+}
+
+/* ─── Accordion toggle ─── */
+function toggleAcc(id) {
+  const acc = document.getElementById(id);
+  acc.classList.toggle('open');
+}
+
+/* ─── Quiz logic ─── */
+let quizScore = 0;
+let quizAnswered = 0;
+const TOTAL_Q = 20;
+
+function checkQ(qid, btn, isCorrect, msg) {
+  const box = btn.closest('.quiz-box');
+  if (box.dataset.answered) return;
+  box.dataset.answered = '1';
+  box.querySelectorAll('.quiz-opt').forEach(b => { b.disabled = true; });
+  btn.classList.add(isCorrect ? 'correct' : 'wrong');
+  const fb = document.getElementById('fb-' + qid);
+  if (fb) {
+    fb.className = 'quiz-feedback show ' + (isCorrect ? 'feedback-correct' : 'feedback-wrong');
+    fb.textContent = msg;
+  }
+  if (isCorrect) quizScore++;
+  quizAnswered++;
+  if (quizAnswered === TOTAL_Q) {
+    const sb = document.getElementById('score-block');
+    if (sb) {
+      sb.style.display = '';
+      document.getElementById('final-score').textContent = quizScore + '/' + TOTAL_Q;
+      const pct = (quizScore / TOTAL_Q) * 100;
+      const msgs = pct >= 90 ? '🏆 Outstanding! You\'ve mastered this chapter.' :
+                   pct >= 70 ? '🎉 Great work! Review the missed answers to perfect your score.' :
+                   pct >= 50 ? '👍 Good effort — go over the sections again and retry.' :
+                               '📚 Keep studying the notes and come back for another attempt!';
+      document.getElementById('score-msg').textContent = msgs;
+      sb.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+}
+
+/* ─── Hero canvas animation ─── */
+(function() {
+  const canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const particles = [];
+  for (let i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.3,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      alpha: Math.random() * 0.4 + 0.05,
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Draw connections
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(232,184,75,${0.06 * (1 - dist / 120)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    // Draw particles
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(232,184,75,${p.alpha})`;
+      ctx.fill();
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
